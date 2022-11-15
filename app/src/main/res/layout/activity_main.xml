@@ -26,24 +26,41 @@
         android:text="Welcome to BCC Attendance Monitoring System. Enter Password to proceed."
         android:textColor="#FFFFFF"
         android:textSize="20sp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        />
 
     <EditText
         android:id="@+id/editTextTextPassword2"
         android:layout_width="306dp"
         android:layout_height="68dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="24dp"
         android:background="#30FFFFFF"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/authBtn"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Authorize"
+        android:textColor="#3DC391"
+        app:backgroundTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
