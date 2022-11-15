@@ -6,4 +6,73 @@
     android:layout_height="match_parent"
     tools:context=".SearchClass">
 
+    <Button
+        android:id="@+id/searchClassBtn"
+        android:layout_width="252dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Search Class"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:backgroundTint="#3BC393"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/section" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="393dp"
+        android:layout_height="358dp"
+        android:alpha="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/logo_white" />
+
+    <EditText
+        android:id="@+id/year"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="88dp"
+        android:background="#30000000"
+        android:ems="10"
+        android:hint="Year"
+        android:inputType="number"
+        android:paddingStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/Course"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="#30000000"
+        android:ems="10"
+        android:hint="Course"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/year" />
+
+    <EditText
+        android:id="@+id/section"
+        android:layout_width="219dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="16dp"
+        android:background="#30000000"
+        android:ems="10"
+        android:hint="Section"
+        android:inputType="textPersonName"
+        android:paddingStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Course" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

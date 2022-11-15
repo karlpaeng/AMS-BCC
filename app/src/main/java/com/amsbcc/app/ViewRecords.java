@@ -28,6 +28,13 @@ public class ViewRecords extends AppCompatActivity {
             }
         });
         //searchClass
+        searchClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ViewRecords.this, SearchClass.class);
+                startActivity(intent);
+            }
+        });
         //searchDate
 
     }
