@@ -7,41 +7,9 @@
     tools:context=".Home">
 
     <Button
-        android:id="@+id/loginScan"
-        android:layout_width="140dp"
-        android:layout_height="73dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/round_btn"
-        android:backgroundTint="#FFFFFF"
-        android:text="Login \nScan"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#3BC393"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/logoutScan"
-        android:layout_width="140dp"
-        android:layout_height="73dp"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/round_btn"
-        android:backgroundTint="#FFFFFF"
-        android:text="Logout \nScan"
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-        app:backgroundTint="#3BC393"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.195"
-        app:layout_constraintStart_toEndOf="@+id/loginScan"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
         android:id="@+id/viewRecordBtn"
         android:layout_width="302dp"
         android:layout_height="48dp"
-        android:layout_marginTop="40dp"
         android:background="@drawable/round_btn"
         android:backgroundTint="#FFFFFF"
         android:text="View Records"
@@ -49,9 +17,8 @@
         android:textSize="16sp"
         app:backgroundTint="#FFCF4C"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginScan" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
     <Button
         android:id="@+id/mngStudData"
@@ -91,4 +58,46 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mngStudData"
         app:srcCompat="@drawable/logo_white" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="304dp"
+        android:layout_height="151dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.514"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/loginScan"
+            android:layout_width="140dp"
+            android:layout_height="73dp"
+            android:background="@drawable/round_btn"
+            android:backgroundTint="#FFFFFF"
+            android:text="Login \nScan"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:backgroundTint="#3BC393"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/logoutScan"
+            android:layout_width="140dp"
+            android:layout_height="73dp"
+            android:layout_marginStart="24dp"
+            android:background="@drawable/round_btn"
+            android:backgroundTint="#FFFFFF"
+            android:text="Logout \nScan"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            app:backgroundTint="#3BC393"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/loginScan"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.493" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
