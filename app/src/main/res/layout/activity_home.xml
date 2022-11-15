@@ -6,4 +6,89 @@
     android:layout_height="match_parent"
     tools:context=".Home">
 
+    <Button
+        android:id="@+id/loginScan"
+        android:layout_width="140dp"
+        android:layout_height="73dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Login \nScan"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#3BC393"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/logoutScan"
+        android:layout_width="140dp"
+        android:layout_height="73dp"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Logout \nScan"
+        android:textColor="#FFFFFF"
+        android:textSize="20sp"
+        app:backgroundTint="#3BC393"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintStart_toEndOf="@+id/loginScan"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/viewRecordBtn"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="View Records"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:backgroundTint="#FFCF4C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginScan" />
+
+    <Button
+        android:id="@+id/mngStudData"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Manage Student Data"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:backgroundTint="#FFCF4C"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewRecordBtn" />
+
+    <Button
+        android:id="@+id/signoutBtn"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Sign out"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF8A8D"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="392dp"
+        android:layout_height="250dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mngStudData"
+        app:srcCompat="@drawable/logo_white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
