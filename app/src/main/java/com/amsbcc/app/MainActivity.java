@@ -11,15 +11,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    TextView password
     Button auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// no dark mode
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        
         String pw = "admin@bccams";//
-        TextView password  = (TextView) findViewById(R.id.password);
 
+        password = (TextView) findViewById(R.id.password);
         auth = (Button) findViewById(R.id.authBtn);
 
         auth.setOnClickListener(new View.OnClickListener() {
