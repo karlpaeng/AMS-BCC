@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    TextView password
+    TextView password;
     Button auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
