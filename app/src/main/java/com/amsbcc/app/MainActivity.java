@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// no dark mode
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         String pw = "admin@bccams";//
 
         password = (TextView) findViewById(R.id.password);
