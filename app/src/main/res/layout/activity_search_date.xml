@@ -6,4 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".SearchDate">
 
+    <Button
+        android:id="@+id/searchStudBtn"
+        android:layout_width="252dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Search Student"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:backgroundTint="#3BC393"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/calendarView2" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="380dp"
+        android:layout_height="352dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchStudBtn"
+        app:srcCompat="@drawable/logo_white" />
+
+    <CalendarView
+        android:id="@+id/calendarView2"
+        android:layout_width="298dp"
+        android:layout_height="246dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

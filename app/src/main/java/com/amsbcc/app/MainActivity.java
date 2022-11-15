@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String pw = "admin@bccams";//
+        String pw = "q";//
 
         password = (TextView) findViewById(R.id.password);
         auth = (Button) findViewById(R.id.authBtn);
