@@ -6,4 +6,45 @@
     android:layout_height="match_parent"
     tools:context=".SearchID">
 
+    <EditText
+        android:id="@+id/studID"
+        android:layout_width="229dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="180dp"
+        android:background="#30000000"
+        android:drawableLeft="@drawable/ic_baseline_search_24"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Student ID"
+        android:inputType="number"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/viewRecordBtn"
+        android:layout_width="252dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/round_btn"
+        android:backgroundTint="#FFFFFF"
+        android:text="Search Student"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:backgroundTint="#3BC393"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studID" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="380dp"
+        android:layout_height="352dp"
+        android:alpha="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewRecordBtn"
+        app:srcCompat="@drawable/logo_white" />
 </androidx.constraintlayout.widget.ConstraintLayout>
