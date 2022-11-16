@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(password.getText().toString().equals(pw)){
                     Toast.makeText(MainActivity.this, "Authorization Successful", Toast.LENGTH_SHORT).show();
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     //goto home page
                 }else{
