@@ -13,6 +13,13 @@
         android:theme="@style/Theme.AMSBCC"
         tools:targetApi="31">
         <activity
+            android:name=".ManageStudentData"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SearchDate"
             android:exported="false">
             <meta-data
