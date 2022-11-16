@@ -7,7 +7,7 @@
     tools:context=".SearchDate">
 
     <Button
-        android:id="@+id/searchStudBtn"
+        android:id="@+id/selectedDateBtn"
         android:layout_width="252dp"
         android:layout_height="52dp"
         android:layout_marginTop="16dp"
@@ -20,22 +20,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/datePickerBtn" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="380dp"
         android:layout_height="352dp"
-        android:layout_marginTop="16dp"
         android:alpha="0.5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchStudBtn"
+        app:layout_constraintTop_toBottomOf="@+id/selectedDateBtn"
         app:srcCompat="@drawable/logo_white" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/datePickerBtn"
         android:layout_width="252dp"
         android:layout_height="57dp"
         android:layout_marginTop="176dp"
