@@ -1,12 +1,20 @@
 package com.amsbcc.app;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.ResultReceiver;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 public class Home extends AppCompatActivity {
     Button viewRecords;
@@ -21,7 +29,16 @@ public class Home extends AppCompatActivity {
         viewRecords = (Button) findViewById(R.id.viewRecordBtn);
         manageData = (Button) findViewById(R.id.mngStudData);
         signOut = (Button) findViewById(R.id.signoutBtn);
+        loginScan = (Button) findViewById(R.id.loginScan);
         //login qr scan
+        loginScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                scanCode();
+                
+                //Toast.makeText(Home.this, "Toast", Toast.LENGTH_SHORT).show();
+            }
+        });
         //logout qr scan
         viewRecords.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,4 +66,26 @@ public class Home extends AppCompatActivity {
             }
         });
     }
+    private void scanCode(){
+        ScanOptions options = new ScanOptions();
+        options.setPrompt("Press volume up button to turn on flash");
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(CaptureAct.class);
+        barLauncher.launch(options);
+    }
+    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result->{
+        if(result.getContents() != null){
+            //check query if id exists
+            AlertDialog.Builder builder = new AlertDialog.Builder(Home.this);
+            builder.setTitle("Result:");
+            builder.setMessage(result.getContents());
+            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.dismiss();
+                }
+            }).show();
+        }
+    });
 }
