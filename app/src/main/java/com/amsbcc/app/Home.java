@@ -106,9 +106,16 @@ public class Home extends AppCompatActivity {
                 dateStr = simpleDate.format(calendar.getTime());
                 timeStr = simpleTime.format(calendar.getTime());
                 smsBody = dateStr + ":" + "<name>" + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
-                SmsManager mySmsManager = SmsManager.getDefault();
-                mySmsManager.sendTextMessage(result.getContents(), null, smsBody, null, null);
-                alertDia("SMS sent", smsBody + " to " + result.getContents());
+                try{
+                    SmsManager mySmsManager = SmsManager.getDefault();
+                    mySmsManager.sendTextMessage(result.getContents(), null, smsBody, null, null);
+                    //"LOG" + logDB.toUpperCase() + " Scan successful";
+                    //student id : name
+                    alertDia("SMS sent", smsBody + " to " + result.getContents());//temporary
+                }catch (Exception e){
+                    e.printStackTrace();
+                    alertDia("SMS not Sent", "The SMS Notification failed to send.");
+                }
             }else{
                 alertDia("Scan failed", "This student was not found. Try again.");
             }
