@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
         String pw = "q";//
 
-        password = (TextView) findViewById(R.id.password);
-        auth = (Button) findViewById(R.id.authBtn);
+        password = findViewById(R.id.password);
+        auth = findViewById(R.id.authBtn);
 
         auth.setOnClickListener(new View.OnClickListener() {
             @Override
