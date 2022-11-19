@@ -21,6 +21,8 @@ import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class Home extends AppCompatActivity {
     Button viewRecords;
@@ -36,6 +38,12 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        DBHelper dbHalp = new DBHelper(Home.this);
+        String date = new SimpleDateFormat("yyyy-MMM-dd", Locale.getDefault()).format(new Date());
+        if(!(date.equals(dbHalp.getLastSign()))){
+            Toast.makeText(Home.this, "You have been automatically signed out", Toast.LENGTH_LONG).show();
+            signOutFunction();
+        }
         viewRecords = findViewById(R.id.viewRecordBtn);
         manageData = findViewById(R.id.mngStudData);
         signOut = findViewById(R.id.signoutBtn);
@@ -74,19 +82,30 @@ public class Home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Home.this, ManageStudentData.class);
-                startActivity(intent);
+                if(dbHalp.getSigninStatus() == 2){
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(Home.this, "Sorry, you do not have access to this section:(", Toast.LENGTH_LONG).show();
+                }
+
             }
         });
         //signout
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(Home.this, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 Toast.makeText(Home.this, "You have been signed out", Toast.LENGTH_SHORT).show();
-                startActivity(intent);
+
+                signOutFunction();
             }
         });
+    }
+    private void signOutFunction(){
+        DBHelper dbHalp = new DBHelper(Home.this);
+        Intent intent = new Intent(Home.this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        dbHalp.updateSigninRecord(0);
+        startActivity(intent);
     }
     private void scanCode(){
         ScanOptions options = new ScanOptions();

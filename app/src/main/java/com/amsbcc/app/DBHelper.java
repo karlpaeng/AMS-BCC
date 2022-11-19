@@ -35,12 +35,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "stud_section TEXT, " +
                 "stud_contact TEXT)"
         );
-        sqLiteDatabase.execSQL("CREATE TABLE sign_in (" +
-                "id INTEGER PRIMARY KEY, " +
+        sqLiteDatabase.execSQL("CREATE TABLE signin (" +
+                "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "last_sign TEXT, " +
-                "status INTEGER, )"
+                "status INTEGER)"
         );
-        addSigninRecord();
+
     }
 
     @Override
@@ -55,21 +55,35 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("last_sign", date);
         cv.put("status", 0);
 
-        long i = db.insert("sign_in", null, cv);
+        long i = db.insert("signin", null, cv);
 
         db.close();
     }
     public void updateSigninRecord(int value){
         SQLiteDatabase db = this.getWritableDatabase();
         String date = new SimpleDateFormat("yyyy-MMM-dd", Locale.getDefault()).format(new Date());
-        db.execSQL("UPDATE sign_in SET last_sign = '" + date + "', status = " + value + " WHERE id = 1;");
+        db.execSQL("UPDATE signin SET status = " + value + " WHERE id = 1;");
+        if(value != 0){
+            db.execSQL("UPDATE signin SET last_sign = '" + date + "' WHERE id = 1;");
+        }
         db.close();
 
     }
     public int getSigninStatus(){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT status FROM sign_in WHERE id = 1;", null);
+        Cursor cursor = db.rawQuery("SELECT status FROM signin WHERE id = 1;", null);
         cursor.moveToFirst();
         return cursor.getInt(0);
+    }
+    public boolean checkExistingSignin(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT status FROM signin WHERE id = 1;", null);
+        return cursor.moveToFirst();
+    }
+    public String getLastSign(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT last_sign FROM signin WHERE id = 1;", null);
+        cursor.moveToFirst();
+        return cursor.getString(0);
     }
 }

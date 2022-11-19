@@ -22,9 +22,22 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
+        DBHelper dbHalp = new DBHelper(MainActivity.this);
+        if (dbHalp.checkExistingSignin()){
+
+        }else{
+            dbHalp.addSigninRecord();
+        }
+        if (dbHalp.getSigninStatus() != 0){
+            Intent intent = new Intent(MainActivity.this, Home.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+        }
 
 
-        String pw = "q";//
+
+        String securityPw = "q";//
+        String adminPw = "a";
 
         password = findViewById(R.id.password);
         auth = findViewById(R.id.authBtn);
@@ -33,12 +46,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Home.class);
-
-                if(password.getText().toString().equals(pw)){
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                if(password.getText().toString().equals(securityPw)){
                     Toast.makeText(MainActivity.this, "Authorization Successful", Toast.LENGTH_SHORT).show();
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    dbHalp.updateSigninRecord(1);
+
                     startActivity(intent);
                     //goto home page
+                }else if(password.getText().toString().equals(adminPw)){
+                    Toast.makeText(MainActivity.this, "Authorization Successful", Toast.LENGTH_SHORT).show();
+                    dbHalp.updateSigninRecord(2);
+
+                    startActivity(intent);
+                    //go home page, with extra access
                 }else{
                     Toast.makeText(MainActivity.this, "Authorization Failed", Toast.LENGTH_SHORT).show();
                 }
