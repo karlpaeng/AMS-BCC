@@ -40,7 +40,7 @@ public class SearchDate extends AppCompatActivity implements DatePickerDialog.On
 
     @Override
     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-        String dateSelected = monthNames[i1] + " " + i2 + ", " + i;
+        String dateSelected = i + "-" + monthNames[i1] + "-" + i2;
         datePickerButton.setText(dateSelected);
     }
 }
