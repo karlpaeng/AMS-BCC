@@ -34,11 +34,12 @@ public class Home extends AppCompatActivity {
     Calendar calendar;
     SimpleDateFormat simpleDate, simpleTime;
     String dateStr, timeStr;
+    DBHelper dbHalp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        DBHelper dbHalp = new DBHelper(Home.this);
+        dbHalp = new DBHelper(Home.this);
         String date = new SimpleDateFormat("yyyy-MMM-dd", Locale.getDefault()).format(new Date());
         if(!(date.equals(dbHalp.getLastSign()))){
             Toast.makeText(Home.this, "You have been automatically signed out", Toast.LENGTH_LONG).show();
@@ -101,7 +102,7 @@ public class Home extends AppCompatActivity {
         });
     }
     private void signOutFunction(){
-        DBHelper dbHalp = new DBHelper(Home.this);
+        dbHalp = new DBHelper(Home.this);
         Intent intent = new Intent(Home.this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         dbHalp.updateSigninRecord(0);
@@ -118,7 +119,7 @@ public class Home extends AppCompatActivity {
 
     ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result->{
         if(result.getContents() != null){
-            if(true){//check query if id exists, get number from id @ the db
+            if(true){//check query if id exists at student table, get name,contact from id @ the db
                 calendar = Calendar.getInstance();
                 simpleDate = new SimpleDateFormat("yyyy-MMM-dd");
                 simpleTime = new SimpleDateFormat("hh:mm:ss a");
