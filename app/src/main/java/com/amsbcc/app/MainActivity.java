@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// no dark mode
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //test comment
         ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS, Manifest.permission.CAMERA}, PackageManager.PERMISSION_GRANTED);
         DBHelper dbHalp = new DBHelper(MainActivity.this);
         if (dbHalp.checkExistingSignin()){
