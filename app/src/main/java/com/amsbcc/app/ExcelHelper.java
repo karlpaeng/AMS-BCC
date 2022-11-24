@@ -1,3 +1,5 @@
+package com.amsbcc.app;
+
 import android.content.ContentValues;
 import android.inputmethodservice.Keyboard;
 import android.util.Log;
