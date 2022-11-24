@@ -152,4 +152,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return i;
     }
+    public void clearScanTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM scans");
+    }
+    
 }
