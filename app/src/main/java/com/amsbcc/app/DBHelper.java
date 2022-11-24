@@ -8,8 +8,12 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import org.apache.xmlbeans.impl.store.Cur;
+
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -156,5 +160,104 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM scans");
     }
-    
+    public List<ScanModel> searchScanByStudID(int studID){
+        List<ScanModel> returnList = new ArrayList<>();
+        //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE stud_num = " + studID + ";", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int StudID = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String date = cursor.getString(2);
+                String time = cursor.getString(3);
+                String log = cursor.getString(4);
+
+                ScanModel scan = new ScanModel(StudID, name, date, time, log);
+                returnList.add(scan);
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    public List<ScanModel> searchScanByClass(String year, String course, String section){
+        List<ScanModel> returnList = new ArrayList<>();
+        //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE stud_num IN (SELECT stud_id FROM students WHERE " +
+                "stud_year = " + year + "AND" +
+                "stud_course = '" + course + "' AND" +
+                "stud_section = '" + section +"');", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int StudID = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String date = cursor.getString(2);
+                String time = cursor.getString(3);
+                String log = cursor.getString(4);
+
+                ScanModel scan = new ScanModel(StudID, name, date, time, log);
+                returnList.add(scan);
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+    public List<ScanModel> searchScanByDate(String dateX){
+        List<ScanModel> returnList = new ArrayList<>();
+        //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE date = '" + dateX + "';", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int StudID = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String date = cursor.getString(2);
+                String time = cursor.getString(3);
+                String log = cursor.getString(4);
+
+                ScanModel scan = new ScanModel(StudID, name, date, time, log);
+                returnList.add(scan);
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+    public List<ScanModel> allScanRecords(){
+        List<ScanModel> returnList = new ArrayList<>();
+        //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM scans", null);
+        if (cursor.moveToFirst()) {
+            do {
+                int StudID = cursor.getInt(0);
+                String name = cursor.getString(1);
+                String date = cursor.getString(2);
+                String time = cursor.getString(3);
+                String log = cursor.getString(4);
+
+                ScanModel scan = new ScanModel(StudID, name, date, time, log);
+                returnList.add(scan);
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }
