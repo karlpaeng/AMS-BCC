@@ -109,8 +109,8 @@ public class SelectFile extends AppCompatActivity {
         sh = wb.getSheetAt(0);
         int rowNum = sh.getLastRowNum();
 
-        Log.d("asd:", ""+rowNum);
-        long x = 0;
+        //Log.d("asd:", ""+rowNum);
+        //long x = 0;
         dbHalp.clearStudentTable();
         for (int q = 1 ; q <= rowNum ; q++){
             StudentModel student = new StudentModel(
@@ -123,11 +123,11 @@ public class SelectFile extends AppCompatActivity {
 
             );
             long lInput = dbHalp.inputStudentToDB(student);
-            x+=lInput;
+            //x+=lInput;
 
         }
         dbHalp.closeDB();
-        Toast.makeText(SelectFile.this, "rows: " + rowNum + "db:" + x, Toast.LENGTH_SHORT).show();
+        Toast.makeText(SelectFile.this, "File imported with " + rowNum + " rows of data", Toast.LENGTH_SHORT).show();
 
 
     }
