@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -30,6 +31,8 @@ public class SelectFile extends AppCompatActivity {
         pathTV = findViewById(R.id.pathTextView);
         importFile = findViewById(R.id.importBtn);
 
+        filePath = "";
+
         selectFile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -39,11 +42,23 @@ public class SelectFile extends AppCompatActivity {
                 //pathTV.setText();
             }
         });
+        importFile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (filePath.equals("")){
+                    Toast.makeText(SelectFile.this, "Pls select an xlsx file first", Toast.LENGTH_SHORT).show();
+                }else{
+                    //
+                    //Toast.makeText(SelectFile.this, "selected", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //
-        pathTV.setText(data.getDataString());
-        //filePath = data.;
+
+        filePath = data.getDataString();
+        pathTV.setText(filePath);
         studListUri = data.getData();
         //uriString = uri.toString();
 
