@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFCF4C"
+    android:id="@+id/main_layout"
     tools:context=".ManageStudentData">
 
     <TextView
@@ -27,6 +28,7 @@
         android:layout_marginTop="56dp"
         android:background="@drawable/round_btn"
         android:backgroundTint="#FFFFFF"
+        android:onClick="OpenFilePicker"
         android:text="Update Student List"
         android:textColor="#FFCF4C"
         app:backgroundTint="@color/white"
