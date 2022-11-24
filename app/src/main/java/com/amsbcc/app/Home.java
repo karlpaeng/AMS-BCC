@@ -119,23 +119,38 @@ public class Home extends AppCompatActivity {
 
     ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result->{
         if(result.getContents() != null){
-            if(true){//check query if id exists at student table, get name,contact from id @ the db
+            StudentModel student = dbHalp.searchStudentByID(Integer.parseInt(result.getContents()));
+            if(student.studID != -1){//check query if id exists at student table, get name,contact from id @ the db
+
                 calendar = Calendar.getInstance();
                 simpleDate = new SimpleDateFormat("yyyy-MMM-dd");
                 simpleTime = new SimpleDateFormat("hh:mm:ss a");
                 dateStr = simpleDate.format(calendar.getTime());
                 timeStr = simpleTime.format(calendar.getTime());
-                smsBody = dateStr + ":" + "<name>" + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
+
+                ScanModel scan = new ScanModel(
+                        student.studID,
+                        student.studName,
+                        dateStr,
+                        timeStr,
+                        logDB
+                );
+                dbHalp.inputScanToDB(scan);
+                smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
                 try{
                     SmsManager mySmsManager = SmsManager.getDefault();
-                    mySmsManager.sendTextMessage(result.getContents(), null, smsBody, null, null);
-                    //"LOG" + logDB.toUpperCase() + " Scan successful";
+                    mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
+
+                    //"LOG" + logDB.toUpperCase() + " Scan successful"
                     //student id : name
-                    alertDia("SMS sent", smsBody + " to " + result.getContents());//temporary
+
+                    //temporary
                 }catch (Exception e){
                     e.printStackTrace();
                     alertDia("SMS not Sent", "The SMS Notification failed to send.");
                 }
+                Toast.makeText(Home.this, "SMS was sent", Toast.LENGTH_SHORT).show();
+                alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
             }else{
                 alertDia("Scan failed", "This student was not found. Try again.");
             }

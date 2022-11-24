@@ -73,7 +73,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT status FROM signin WHERE id = 1;", null);
         cursor.moveToFirst();
-        return cursor.getInt(0);
+        int anInt = cursor.getInt(0);
+        cursor.close();
+        return anInt;
     }
     public boolean checkExistingSignin(){
         SQLiteDatabase db = this.getReadableDatabase();
@@ -103,9 +105,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("stud_section", student.studSection);
         cv.put("stud_contact", student.getStudContNum());
 
-
         long i = db.insert("students", null, cv);
-
 
         return i;
 
@@ -113,5 +113,43 @@ public class DBHelper extends SQLiteOpenHelper {
     public void closeDB(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.close();
+    }
+    public StudentModel searchStudentByID(int id){
+        StudentModel student;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM students WHERE stud_id = " + id + ";", null);
+        if(cursor.moveToFirst()) {
+
+            student = new StudentModel(
+                    cursor.getInt(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getString(3),
+                    cursor.getString(4),
+                    cursor.getLong(5)
+            );
+
+        }else{
+            student = new StudentModel(-1, "-", "-", "-", "-", -1);
+        }
+        cursor.close();
+        return student;
+    }
+    public long inputScanToDB(ScanModel scan){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues cv = new ContentValues();
+
+        //cv.put("id", 1);
+        cv.put("stud_num", scan.studentID);
+        cv.put("name", scan.name);
+        cv.put("date", scan.date);
+        cv.put("time", scan.time);
+        cv.put("log", scan.log);
+
+        long i = db.insert("scans", null, cv);
+
+        db.close();
+        return i;
     }
 }
