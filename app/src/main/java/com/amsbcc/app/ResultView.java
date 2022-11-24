@@ -32,7 +32,11 @@ public class ResultView extends AppCompatActivity {
             query.setText(""+id_value);
         }
         if(prev.equals("act_class")){
-
+            label.setText("Class:");
+            year_value = Integer.parseInt(getIntent().getStringExtra("yr_value"));
+            course_value = getIntent().getStringExtra("course_value");
+            section_value = getIntent().getStringExtra("section_value");
+            query.setText(course_value + "-" + year_value + section_value);
         }
         if(prev.equals("act_date")){
             label.setText("Date:");
