@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 "log TEXT)"
         );
         sqLiteDatabase.execSQL("CREATE TABLE students (" +
-                "stud_id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "stud_id INTEGER PRIMARY KEY," +
                 "stud_name TEXT, " +
                 "stud_yr INTEGER, " +
                 "stud_course TEXT, " +
@@ -85,5 +85,33 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT last_sign FROM signin WHERE id = 1;", null);
         cursor.moveToFirst();
         return cursor.getString(0);
+    }
+    public void clearStudentTable(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DELETE FROM students");
+    }
+    public long inputStudentToDB(StudentModel student){
+        SQLiteDatabase db = this.getWritableDatabase();
+        //db.execSQL("DELETE FROM students");
+        ContentValues cv = new ContentValues();
+
+        //cv.put("id", 1);
+        cv.put("stud_id", student.studID);
+        cv.put("stud_name", student.studName);
+        cv.put("stud_yr", student.studYear);
+        cv.put("stud_course", student.studCourse);
+        cv.put("stud_section", student.studSection);
+        cv.put("stud_contact", student.getStudContNum());
+
+
+        long i = db.insert("students", null, cv);
+
+
+        return i;
+
+    }
+    public void closeDB(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.close();
     }
 }

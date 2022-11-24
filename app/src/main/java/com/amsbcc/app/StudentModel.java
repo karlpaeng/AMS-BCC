@@ -6,9 +6,11 @@ public class StudentModel {
     public String studYear;
     public String studCourse;
     public String studSection;
-    public String studContNum;
+    public long studContNum;
 
-    public StudentModel(int studID, String studName, String studYear, String studCourse, String studSection, String studContNum) {
+
+
+    public StudentModel(int studID, String studName, String studYear, String studCourse, String studSection, long studContNum) {
         this.studID = studID;
         this.studName = studName;
         this.studYear = studYear;
@@ -30,5 +32,8 @@ public class StudentModel {
                 ", studSection='" + studSection + '\'' +
                 ", studContNum='" + studContNum + '\'' +
                 '}';
+    }
+    public String getStudContNum() {
+        return "" + studContNum;
     }
 }
