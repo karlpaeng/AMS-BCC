@@ -160,8 +160,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM scans");
     }
-    public List<ScanModel> searchScanByStudID(int studID){
-        List<ScanModel> returnList = new ArrayList<>();
+    public ArrayList<ScanModel> searchScanByStudID(int studID){
+        ArrayList<ScanModel> returnList = new ArrayList<>();
         //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE stud_num = " + studID + ";", null);

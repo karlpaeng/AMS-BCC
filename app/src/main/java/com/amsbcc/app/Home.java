@@ -138,8 +138,8 @@ public class Home extends AppCompatActivity {
                 dbHalp.inputScanToDB(scan);
                 smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
                 try{
-                    SmsManager mySmsManager = SmsManager.getDefault();
-                    mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
+                    //SmsManager mySmsManager = SmsManager.getDefault();
+                    //mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
 
                     //"LOG" + logDB.toUpperCase() + " Scan successful"
                     //student id : name
