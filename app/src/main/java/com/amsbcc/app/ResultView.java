@@ -99,6 +99,8 @@ public class ResultView extends AppCompatActivity {
             public void onClick(View view) {
                 if(scanList.isEmpty()){
                     Toast.makeText(ResultView.this, "There are no results to export", Toast.LENGTH_SHORT).show();
+                }else{
+                    //
                 }
             }
         });
