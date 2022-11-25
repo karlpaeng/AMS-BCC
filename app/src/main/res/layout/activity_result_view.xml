@@ -34,7 +34,7 @@
 
     <TextView
         android:id="@+id/queryTextView"
-        android:layout_width="276dp"
+        android:layout_width="350dp"
         android:layout_height="25dp"
         android:layout_marginStart="20dp"
         android:text="y"

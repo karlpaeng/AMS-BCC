@@ -167,11 +167,11 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE stud_num = " + studID + ";", null);
         if (cursor.moveToFirst()) {
             do {
-                int StudID = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String date = cursor.getString(2);
-                String time = cursor.getString(3);
-                String log = cursor.getString(4);
+                int StudID = cursor.getInt(1);
+                String name = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String log = cursor.getString(5);
 
                 ScanModel scan = new ScanModel(StudID, name, date, time, log);
                 returnList.add(scan);
@@ -185,21 +185,21 @@ public class DBHelper extends SQLiteOpenHelper {
         return returnList;
     }
 
-    public List<ScanModel> searchScanByClass(String year, String course, String section){
-        List<ScanModel> returnList = new ArrayList<>();
+    public ArrayList<ScanModel> searchScanByClass(String year, String course, String section){
+        ArrayList<ScanModel> returnList = new ArrayList<>();
         //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE stud_num IN (SELECT stud_id FROM students WHERE " +
-                "stud_year = " + year + "AND" +
-                "stud_course = '" + course + "' AND" +
+                "stud_yr = " + year + " AND " +
+                "stud_course = '" + course + "' AND " +
                 "stud_section = '" + section +"');", null);
         if (cursor.moveToFirst()) {
             do {
-                int StudID = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String date = cursor.getString(2);
-                String time = cursor.getString(3);
-                String log = cursor.getString(4);
+                int StudID = cursor.getInt(1);
+                String name = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String log = cursor.getString(5);
 
                 ScanModel scan = new ScanModel(StudID, name, date, time, log);
                 returnList.add(scan);
@@ -212,18 +212,18 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
-    public List<ScanModel> searchScanByDate(String dateX){
-        List<ScanModel> returnList = new ArrayList<>();
+    public ArrayList<ScanModel> searchScanByDate(String dateX){
+        ArrayList<ScanModel> returnList = new ArrayList<>();
         //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE date = '" + dateX + "';", null);
         if (cursor.moveToFirst()) {
             do {
-                int StudID = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String date = cursor.getString(2);
-                String time = cursor.getString(3);
-                String log = cursor.getString(4);
+                int StudID = cursor.getInt(1);
+                String name = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String log = cursor.getString(5);
 
                 ScanModel scan = new ScanModel(StudID, name, date, time, log);
                 returnList.add(scan);
@@ -259,5 +259,19 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+    public String getStudentNameByID(int q){
+        String returnStr;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM students WHERE stud_id = " + q + ";", null);
+        if (cursor.moveToFirst()) {
+            returnStr = cursor.getString(1);
+        } else {
+            returnStr = "NO_RESULT";
+        }
+
+        cursor.close();
+        db.close();
+        return returnStr;
     }
 }

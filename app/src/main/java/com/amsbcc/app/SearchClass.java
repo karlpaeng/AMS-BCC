@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Locale;
+
 public class SearchClass extends AppCompatActivity {
     EditText yr, course, section;
     Button search;
@@ -30,8 +32,8 @@ public class SearchClass extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                courseStr = course.getText().toString();
-                sectionStr = section.getText().toString();
+                courseStr = course.getText().toString().toUpperCase();
+                sectionStr = section.getText().toString().toUpperCase();
                 yrStr = yr.getText().toString();
                 if(false) {//sanitize using regex
                 }
