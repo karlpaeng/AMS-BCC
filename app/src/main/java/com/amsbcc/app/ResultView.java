@@ -1,18 +1,35 @@
 package com.amsbcc.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 public class ResultView extends AppCompatActivity {
     private ArrayList<ScanModel> scanList;
@@ -28,7 +45,7 @@ public class ResultView extends AppCompatActivity {
     String date_value;
     String name_value;
 
-    boolean emptyResult;
+    //boolean emptyResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +54,20 @@ public class ResultView extends AppCompatActivity {
         query = findViewById(R.id.queryTextView);
         export = findViewById(R.id.export2file);
         recyclerView = findViewById(R.id.recView);
+
+        int permission = ActivityCompat.checkSelfPermission(ResultView.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (permission != PackageManager.PERMISSION_GRANTED) {
+            // We don't have permission so prompt the user
+            ActivityCompat.requestPermissions(
+                    ResultView.this,
+                    new String[]{
+
+                            Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE
+                    }, PackageManager.PERMISSION_GRANTED
+            );
+        }
 
         DBHelper dbHalp = new DBHelper(ResultView.this);
 
@@ -101,6 +132,30 @@ public class ResultView extends AppCompatActivity {
                     Toast.makeText(ResultView.this, "There are no results to export", Toast.LENGTH_SHORT).show();
                 }else{
                     //
+                    XSSFWorkbook xwb = new XSSFWorkbook();
+                    XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
+                    XSSFRow xRow = xsheet.createRow(0);
+                    XSSFCell xCell = xRow.createCell(0);
+                    xCell.setCellValue("asd");
+
+                    String dateNow = new SimpleDateFormat("yyyyMMMdd-hhmmssa", Locale.getDefault()).format(new Date());
+
+                    File filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + "-exported.xlsx");;
+                    try {
+                        if(filePath.exists()) filePath.createNewFile();
+                        else filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + "-exported.xlsx");
+                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+                        xwb.write(fileOutputStream);
+                        if (fileOutputStream!=null){
+                            fileOutputStream.flush();
+                            fileOutputStream.close();
+                        }
+                        Toast.makeText(ResultView.this, "File was created:" + filePath.toString(), Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(ResultView.this, "File failed to create", Toast.LENGTH_SHORT).show();
+                        e.printStackTrace();
+                        Log.d("asd:", e.toString());
+                    }
                 }
             }
         });
