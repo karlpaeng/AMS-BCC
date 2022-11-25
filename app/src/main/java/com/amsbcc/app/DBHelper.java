@@ -236,8 +236,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
-    public List<ScanModel> allScanRecords(){
-        List<ScanModel> returnList = new ArrayList<>();
+    public ArrayList<ScanModel> allScanRecords(){
+        ArrayList<ScanModel> returnList = new ArrayList<>();
         //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM scans", null);
