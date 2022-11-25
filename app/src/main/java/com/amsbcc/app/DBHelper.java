@@ -243,11 +243,11 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM scans", null);
         if (cursor.moveToFirst()) {
             do {
-                int StudID = cursor.getInt(0);
-                String name = cursor.getString(1);
-                String date = cursor.getString(2);
-                String time = cursor.getString(3);
-                String log = cursor.getString(4);
+                int StudID = cursor.getInt(1);
+                String name = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String log = cursor.getString(5);
 
                 ScanModel scan = new ScanModel(StudID, name, date, time, log);
                 returnList.add(scan);
