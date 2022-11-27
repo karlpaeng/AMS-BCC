@@ -134,9 +134,23 @@ public class ResultView extends AppCompatActivity {
                     //
                     XSSFWorkbook xwb = new XSSFWorkbook();
                     XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
-                    XSSFRow xRow = xsheet.createRow(0);
-                    XSSFCell xCell = xRow.createCell(0);
-                    xCell.setCellValue("asd");
+                    int listSize = scanList.size();
+                    for (int q = 0 ; q < listSize ; q++){
+                        XSSFRow xRow = xsheet.createRow(q);
+                        XSSFCell xCell = xRow.createCell(0);
+                        xCell.setCellValue(scanList.get(q).studentID + "");
+                        xCell = xRow.createCell(1);
+                        xCell.setCellValue(scanList.get(q).name);
+                        xCell = xRow.createCell(2);
+                        xCell.setCellValue(scanList.get(q).date);
+                        xCell = xRow.createCell(3);
+                        xCell.setCellValue(scanList.get(q).time);
+                        xCell = xRow.createCell(4);
+                        xCell.setCellValue(scanList.get(q).log);
+                    }
+//                    XSSFRow xRow = xsheet.createRow(0);
+//                    XSSFCell xCell = xRow.createCell(0);
+//                    xCell.setCellValue("asd");
 
                     String dateNow = new SimpleDateFormat("yyyyMMMdd-hhmmssa", Locale.getDefault()).format(new Date());
 
