@@ -53,7 +53,7 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
 
-        app:backgroundTint="#3BC393"
+        app:backgroundTint="#2A5C99"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -63,11 +63,11 @@
         android:id="@+id/imageViewSF"
         android:layout_width="320dp"
         android:layout_height="310dp"
-        android:alpha="0.5"
+        android:alpha="0.8"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/logo_white" />
+        app:srcCompat="@drawable/bcc_logo_transpa_nav" />
 
     <TextView
         android:id="@+id/textView4"

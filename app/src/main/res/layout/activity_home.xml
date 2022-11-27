@@ -15,7 +15,7 @@
         android:text="View Records"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:backgroundTint="#FFCF4C"
+        app:backgroundTint="#2A5C99"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
@@ -30,7 +30,7 @@
         android:text="Manage Student Data"
         android:textColor="#FFFFFF"
         android:textSize="16sp"
-        app:backgroundTint="#FFCF4C"
+        app:backgroundTint="#2A5C99"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,7 +44,7 @@
         android:backgroundTint="#FFFFFF"
         android:text="Sign out"
         android:textColor="#FFFFFF"
-        app:backgroundTint="#FF8A8D"
+        app:backgroundTint="#90000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
@@ -57,7 +57,7 @@
         app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mngStudData"
-        app:srcCompat="@drawable/logo_white" />
+        app:srcCompat="@drawable/bcc_logo_transpa_nav" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
@@ -78,7 +78,7 @@
             android:text="Login \nScan"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:backgroundTint="#3BC393"
+            app:backgroundTint="#14C0CC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -93,7 +93,7 @@
             android:text="Logout \nScan"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            app:backgroundTint="#3BC393"
+            app:backgroundTint="#14C0CC"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/loginScan"

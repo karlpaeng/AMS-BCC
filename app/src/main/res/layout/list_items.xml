@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#502A5C99">
 
     <TextView
         android:id="@+id/dateTxtItem"
@@ -52,7 +53,7 @@
         android:id="@+id/divider"
         android:layout_width="1dp"
         android:layout_height="28dp"
-        android:background="#BDBDBD"
+        android:background="#2A5C99"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dateTxtItem"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,8 +62,17 @@
         android:id="@+id/divider2"
         android:layout_width="1dp"
         android:layout_height="28dp"
-        android:background="#BDBDBD"
+        android:background="#2A5C99"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/timeTxtItem"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider8"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+
+        android:background="#2A5C99"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:layout_editor_absoluteX="1dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
