@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFCF4C"
+    android:background="#2A5C99"
     tools:context=".ManageStudentData">
 
     <TextView
@@ -28,7 +28,7 @@
         android:background="@drawable/round_btn"
         android:backgroundTint="#FFFFFF"
         android:text="Update Student List"
-        android:textColor="#FFCF4C"
+        android:textColor="#2A5C99"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -43,7 +43,7 @@
         android:background="@drawable/round_btn"
         android:backgroundTint="#FFFFFF"
         android:text="Export all Scan Records"
-        android:textColor="#FFCF4C"
+        android:textColor="#2A5C99"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -58,7 +58,7 @@
         android:background="@drawable/round_btn"
         android:backgroundTint="#FFFFFF"
         android:text="Clear all Scan Records"
-        android:textColor="#FFCF4C"
+        android:textColor="#2A5C99"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -73,5 +73,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/clrAllBtn"
-        app:srcCompat="@drawable/app_logo" />
+        app:srcCompat="@drawable/bcc_logo_navy2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

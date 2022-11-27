@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3BC393"
+    android:background="#2A5C99"
     tools:context=".MainActivity">
 
     <ImageView
@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/app_logo_green_green" />
+        app:srcCompat="@drawable/bcc_logo_navy2" />
 
     <TextView
         android:id="@+id/textView"
@@ -42,6 +42,7 @@
         android:hint="Password"
         android:inputType="textPassword"
         android:padding="20dp"
+        android:textColorHint="#90FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +56,7 @@
         android:background="@drawable/round_btn"
         android:backgroundTint="#FFFFFF"
         android:text="Authorize"
-        android:textColor="#3DC391"
+        android:textColor="#2A5C99"
         app:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"

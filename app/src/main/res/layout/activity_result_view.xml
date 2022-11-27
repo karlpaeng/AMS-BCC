@@ -13,7 +13,7 @@
         android:layout_height="43dp"
         android:layout_marginTop="32dp"
         android:text="Scan Record Search Results"
-        android:textColor="#000000"
+        android:textColor="#2A5C99"
         android:textSize="28sp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +47,7 @@
         android:id="@+id/constraintLayout2"
         android:layout_width="391dp"
         android:layout_height="399dp"
+        android:background="#5014C0CC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider3">
