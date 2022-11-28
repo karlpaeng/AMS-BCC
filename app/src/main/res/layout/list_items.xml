@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#502A5C99">
+    android:background="@color/light_b_lighter">
 
     <TextView
         android:id="@+id/dateTxtItem"
@@ -74,5 +74,6 @@
 
         android:background="#2A5C99"
         app:layout_constraintBottom_toBottomOf="parent"
+
         tools:layout_editor_absoluteX="1dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
