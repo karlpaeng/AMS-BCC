@@ -166,6 +166,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE stud_num = " + studID + ";", null);
         if (cursor.moveToFirst()) {
+            ScanModel scanHead = new ScanModel(-1, "NAME", "DATE", "TIME", "LOG");
+            returnList.add(scanHead);
             do {
                 int StudID = cursor.getInt(1);
                 String name = cursor.getString(2);
@@ -194,6 +196,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "stud_course = '" + course + "' AND " +
                 "stud_section = '" + section +"');", null);
         if (cursor.moveToFirst()) {
+            ScanModel scanHead = new ScanModel(-1, "NAME", "DATE", "TIME", "LOG");
+            returnList.add(scanHead);
             do {
                 int StudID = cursor.getInt(1);
                 String name = cursor.getString(2);
@@ -218,6 +222,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM scans WHERE date = '" + dateX + "';", null);
         if (cursor.moveToFirst()) {
+            ScanModel scanHead = new ScanModel(-1, "NAME", "DATE", "TIME", "LOG");
+            returnList.add(scanHead);
             do {
                 int StudID = cursor.getInt(1);
                 String name = cursor.getString(2);

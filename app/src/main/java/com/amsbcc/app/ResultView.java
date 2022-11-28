@@ -44,6 +44,7 @@ public class ResultView extends AppCompatActivity {
     String section_value;
     String date_value;
     String name_value;
+    String fileNameAdd;
 
     //boolean emptyResult;
     @Override
@@ -73,7 +74,7 @@ public class ResultView extends AppCompatActivity {
 
         String prev = getIntent().getStringExtra("prev_act");
         if(prev.equals("act_id")){
-            label.setText("ID/Student's name:");
+            label.setText("(ID)Student's name:");
             id_value = Integer.parseInt(getIntent().getStringExtra("id_value"));
             name_value = dbHalp.getStudentNameByID(id_value);
 
@@ -81,7 +82,8 @@ public class ResultView extends AppCompatActivity {
             if(scanList.isEmpty()){
                 query.setText("NO_RESULTS_FOUND");
             }else {
-                query.setText(id_value + "/" + name_value);
+                query.setText("(" + id_value + ")" + name_value);
+                fileNameAdd = "-searched-" + id_value;
             }
 
             RecAdapter adapter = new RecAdapter(scanList);
@@ -99,6 +101,7 @@ public class ResultView extends AppCompatActivity {
 
             scanList = dbHalp.searchScanByClass(""+year_value, course_value, section_value);
             query.setText(course_value + "-" + year_value + section_value);
+            fileNameAdd = "-searched-" + course_value + year_value + section_value;
             if(scanList.isEmpty()){
                 query.setText(query.getText().toString() + "(NO_RESULTS_FOUND)");
             }
@@ -112,6 +115,7 @@ public class ResultView extends AppCompatActivity {
         if(prev.equals("act_date")){
             label.setText("Date:");
             date_value = getIntent().getStringExtra("date_value");
+            fileNameAdd = "-searched-" + date_value;
 
             scanList = dbHalp.searchScanByDate(date_value);
             query.setText(date_value);
@@ -138,8 +142,8 @@ public class ResultView extends AppCompatActivity {
                     xsheet.setColumnWidth(2, 15 * 256);
                     xsheet.setColumnWidth(3, 15 * 256);
                     int listSize = scanList.size();
-                    for (int q = 0 ; q < listSize ; q++){
-                        XSSFRow xRow = xsheet.createRow(q);
+                    for (int q = 1 ; q < listSize ; q++){
+                        XSSFRow xRow = xsheet.createRow(q-1);
                         XSSFCell xCell = xRow.createCell(0);
                         xCell.setCellValue(scanList.get(q).studentID + "");
                         xCell = xRow.createCell(1);
@@ -157,10 +161,10 @@ public class ResultView extends AppCompatActivity {
 
                     String dateNow = new SimpleDateFormat("yyyyMMMdd-hhmmssa", Locale.getDefault()).format(new Date());
 
-                    File filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + "-exported.xlsx");;
+                    File filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + fileNameAdd + ".xlsx");
                     try {
                         if(filePath.exists()) filePath.createNewFile();
-                        else filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + "-exported.xlsx");
+                        else filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + fileNameAdd + ".xlsx");
                         FileOutputStream fileOutputStream = new FileOutputStream(filePath);
                         xwb.write(fileOutputStream);
                         if (fileOutputStream!=null){
