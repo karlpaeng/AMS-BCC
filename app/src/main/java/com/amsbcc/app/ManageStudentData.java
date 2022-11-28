@@ -99,6 +99,9 @@ public class ManageStudentData extends AppCompatActivity {
                     ArrayList<ScanModel> scanList = dbHalp.allScanRecords();
                     XSSFWorkbook xwb = new XSSFWorkbook();
                     XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
+                    xsheet.setColumnWidth(1, 20 * 256);
+                    xsheet.setColumnWidth(2, 15 * 256);
+                    xsheet.setColumnWidth(3, 15 * 256);
                     int listSize = scanList.size();
                     for (int q = 0 ; q < listSize ; q++){
                         XSSFRow xRow = xsheet.createRow(q);
