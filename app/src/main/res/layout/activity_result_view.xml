@@ -73,6 +73,7 @@
         android:layout_height="49dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="44dp"
+        android:background="@drawable/round_corner_btn"
         android:backgroundTint="#30000000"
         android:text="Export to File(xlsx)"
         android:textAllCaps="false"
@@ -80,6 +81,7 @@
         android:typeface="monospace"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:rippleColor="@color/navy"
         app:strokeWidth="0dp" />
 
     <View

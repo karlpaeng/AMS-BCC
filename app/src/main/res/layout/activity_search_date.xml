@@ -34,10 +34,12 @@
         app:srcCompat="@drawable/bcc_logo_transpa_nav" />
 
     <Button
+
         android:id="@+id/datePickerBtn"
         android:layout_width="252dp"
         android:layout_height="57dp"
         android:layout_marginTop="176dp"
+        android:background="@drawable/round_corner_btn"
         android:backgroundTint="#30000000"
         android:text="Pick a Date"
         android:textAllCaps="false"
