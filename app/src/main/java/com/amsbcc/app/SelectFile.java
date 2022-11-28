@@ -1,11 +1,14 @@
 package com.amsbcc.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.loader.content.CursorLoader;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -87,10 +90,32 @@ public class SelectFile extends AppCompatActivity {
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //
-
-        filePath = data.getDataString();
-        pathTV.setText(filePath);
         studListUri = data.getData();
+        //String path = null;
+//        String[] proj = { MediaStore.MediaColumns.DATA };
+//        Cursor cursor = getContentResolver().query(studListUri, proj, null, null, null);
+//        if (cursor.moveToFirst()) {
+//            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+//            filePath = cursor.getString(column_index);
+//        }
+//        cursor.close();
+
+//        String[] proj = { MediaStore.Images.Media.DATA };
+//        CursorLoader loader = new CursorLoader(SelectFile.this, studListUri, proj, null, null, null);
+//        Cursor cursor = loader.loadInBackground();
+//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+//        cursor.moveToFirst();
+//        filePath = cursor.getString(column_index);
+//        cursor.close();
+        //Log.d("asd: ", filePath + "q");
+        File tempFile = new File(studListUri.getPath());
+        final String[] split = tempFile.getPath().split(":");//split the path.
+        filePath = split[1];
+        //filePath = tempFile.getAbsolutePath();
+
+        //filePath = data.getDataString();
+        pathTV.setText(filePath);
+
 
 
         super.onActivityResult(requestCode, resultCode, data);
