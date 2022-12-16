@@ -3,71 +3,91 @@ package com.amsbcc.app;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amsbcc.app.databinding.ActivityMainBinding;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
+    ActivityMainBinding binding;
     TextView password;
     Button auth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// no dark mode
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ActivityCompat.requestPermissions(MainActivity.this, new String[]{
-                Manifest.permission.SEND_SMS,
-                Manifest.permission.CAMERA,
-                Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        }, PackageManager.PERMISSION_GRANTED);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        replaceFragment(new HomeFrag());
+        binding.bottomNavigationView.setSelectedItemId(R.id.home);
+        //-----------------------
         DBHelper dbHalp = new DBHelper(MainActivity.this);
         if (dbHalp.checkExistingSignin()){
 
         }else{
             dbHalp.addSigninRecord();
         }
-        if (dbHalp.getSigninStatus() != 0){
-            Intent intent = new Intent(MainActivity.this, Home.class);
+        if (dbHalp.getSigninStatus() == 0){
+            Intent intent = new Intent(MainActivity.this, Login.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
         }
+        String date = new SimpleDateFormat("yyyy-MMM-dd", Locale.getDefault()).format(new Date());
+        if(!(date.equals(dbHalp.getLastSign()))){
+            Toast.makeText(MainActivity.this, "You have been automatically signed out", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, Login.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            dbHalp.updateSigninRecord(0);
+            startActivity(intent);
+        }
+        //-----------------------
 
-
-
-        String securityPw = "q";//
-        String adminPw = "a";
-
-        password = findViewById(R.id.password);
-        auth = findViewById(R.id.authBtn);
-
-        auth.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Home.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                if(password.getText().toString().equals(securityPw)){
-                    Toast.makeText(MainActivity.this, "Authorization Successful", Toast.LENGTH_SHORT).show();
-                    dbHalp.updateSigninRecord(1);
-
-                    startActivity(intent);
-                    //goto home page
-                }else if(password.getText().toString().equals(adminPw)){
-                    Toast.makeText(MainActivity.this, "Authorization Successful", Toast.LENGTH_SHORT).show();
-                    dbHalp.updateSigninRecord(2);
-
-                    startActivity(intent);
-                    //go home page, with extra access
-                }else{
-                    Toast.makeText(MainActivity.this, "Authorization Failed", Toast.LENGTH_SHORT).show();
-                }
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.scan:
+                    replaceFragment(new ScanFrag());
+                    break;
+                case R.id.view:
+                    replaceFragment(new ViewFrag());
+                    break;
+                case R.id.home:
+                    replaceFragment(new HomeFrag());
+                    break;
+                case R.id.mnge:
+                    replaceFragment(new MngeFrag());
+                    break;
+                case R.id.sett:
+                    replaceFragment(new SettFrag());
+                    break;
             }
+
+
+            return true;
         });
+
+
+
+    }
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frameLayout, fragment);
+        fragmentTransaction.commit();
+
     }
 }
