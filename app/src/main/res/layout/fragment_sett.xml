@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettFrag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/gray"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="setting_fragment" />
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/signOutNew"
+            android:layout_width="200dp"
+            android:layout_height="99dp"
+            android:background="@drawable/round_solid"
+            android:drawableRight="@drawable/icon_signout"
+
+            android:drawablePadding="200000dp"
+            android:drawableTint="@color/red"
+
+            android:fontFamily="sans-serif"
+            android:gravity="left|center"
+            android:paddingLeft="20dp"
+            android:text="Sign Out"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="20dp"
+            android:theme="@style/solidBtn"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

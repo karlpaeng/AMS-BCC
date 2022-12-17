@@ -2,7 +2,7 @@
 <resources>
     <color name="navy">#FF2A5C99</color>
     <color name="light_b">#FF14C0CC</color>
-    <color name="light_b_lighter">#5014C0CC</color>
+    <color name="light_b_lighter">#9014C0CC</color>
     <color name="purple_200">#FF14C0CC</color>
     <color name="purple_500">#FF14C0CC</color>
     <color name="purple_700">#FF14C0CC</color>
@@ -11,4 +11,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="gray">#50BDBDBD</color>
+    <color name="d_gray">#BDBDBD</color>
+    <color name="transpa">#01ffffff</color>
+    <color name="red">#d63e3e</color>
 </resources>

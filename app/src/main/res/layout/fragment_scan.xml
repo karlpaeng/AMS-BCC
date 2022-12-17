@@ -1,14 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ScanFrag">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@color/gray"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="scan_fragment" />
+        android:layout_height="match_parent">
 
+        <Button
+            android:id="@+id/scanIn"
+            android:layout_width="236dp"
+            android:layout_height="103dp"
+            android:layout_marginTop="200dp"
+            android:background="@drawable/round_solid"
+            android:drawableLeft="@drawable/icon_login"
+            android:drawablePadding="200000dp"
+
+            android:drawableTint="@color/navy"
+            android:fontFamily="sans-serif"
+
+            android:gravity="left|center"
+            android:paddingLeft="40dp"
+            android:text="   Login\n   Scan"
+            android:textAllCaps="false"
+            android:textColor="@color/navy"
+            android:textSize="20dp"
+            android:theme="@style/solidBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/scanOut"
+            android:layout_width="236dp"
+            android:layout_height="103dp"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/round_solid"
+            android:drawableLeft="@drawable/icon_logout"
+            android:drawablePadding="200000dp"
+            android:drawableTint="@color/navy"
+
+            android:fontFamily="sans-serif"
+            android:gravity="left|center"
+
+            android:paddingLeft="40dp"
+            android:text="   Logout\n   Scan"
+            android:textAllCaps="false"
+            android:textColor="@color/navy"
+            android:textSize="20dp"
+            android:theme="@style/solidBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/scanIn" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

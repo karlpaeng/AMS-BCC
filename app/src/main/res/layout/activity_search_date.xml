@@ -45,6 +45,7 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:typeface="monospace"
+        app:backgroundTint="@color/light_b"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"

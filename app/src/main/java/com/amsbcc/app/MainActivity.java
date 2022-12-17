@@ -25,8 +25,7 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-    TextView password;
-    Button auth;
+    TextView actionBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// no dark mode
@@ -35,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         replaceFragment(new HomeFrag());
         binding.bottomNavigationView.setSelectedItemId(R.id.home);
+        actionBar = findViewById(R.id.barView);
         //-----------------------
         DBHelper dbHalp = new DBHelper(MainActivity.this);
         if (dbHalp.checkExistingSignin()){
@@ -61,18 +61,23 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()){
                 case R.id.scan:
                     replaceFragment(new ScanFrag());
+                    actionBar.setText("Student QR Scan");
                     break;
                 case R.id.view:
                     replaceFragment(new ViewFrag());
+                    actionBar.setText("View Scan Records");
                     break;
                 case R.id.home:
                     replaceFragment(new HomeFrag());
+                    actionBar.setText("Dashboard");
                     break;
                 case R.id.mnge:
                     replaceFragment(new MngeFrag());
+                    actionBar.setText("Manage Student Data");
                     break;
                 case R.id.sett:
                     replaceFragment(new SettFrag());
+                    actionBar.setText("Settings");
                     break;
             }
 
