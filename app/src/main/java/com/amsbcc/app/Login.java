@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
         }, PackageManager.PERMISSION_GRANTED);
         DBHelper dbHalp = new DBHelper(Login.this);
 
-        String securityPw = "q";//
+        String securityPw = "qqq";//
         String adminPw = "a";
 
         password = findViewById(R.id.password);

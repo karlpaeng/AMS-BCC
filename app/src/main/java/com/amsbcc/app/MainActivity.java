@@ -174,4 +174,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }).show();
     }
+    public void signOutFunction(){
+        dbHalp = new DBHelper(MainActivity.this);
+        Intent intent = new Intent(MainActivity.this, Login.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        dbHalp.updateSigninRecord(0);
+        startActivity(intent);
+    }
 }
