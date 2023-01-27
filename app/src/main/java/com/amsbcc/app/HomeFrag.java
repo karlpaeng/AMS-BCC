@@ -3,11 +3,16 @@ package com.amsbcc.app;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,7 +21,9 @@ import android.widget.TextView;
  */
 public class HomeFrag extends Fragment {
     View v;
+    RecyclerView recViewDash;
     TextView date, in, out;
+    private ArrayList<ScanModel> scanList;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -66,10 +73,18 @@ public class HomeFrag extends Fragment {
         date = v.findViewById(R.id.dateTextDash);
         in = v.findViewById(R.id.totalSignIn);
         out = v.findViewById(R.id.totalSignOut);
+        recViewDash = v.findViewById(R.id.recViewDash);
 
         date.setText( ((MainActivity) getActivity()).currDate);
         in.setText("" + ((MainActivity) getActivity()).inCount);
         out.setText("" + ((MainActivity) getActivity()).outCount);
+
+        scanList = ((MainActivity) getActivity()).recentScans;
+        RecAdapterDashB adapter = new RecAdapterDashB(scanList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recViewDash.setLayoutManager(layoutManager);
+        recViewDash.setItemAnimator(new DefaultItemAnimator());
+        recViewDash.setAdapter(adapter);
         return v;
     }
 }

@@ -26,6 +26,7 @@ import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -33,6 +34,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     TextView actionBar;
+    ArrayList<ScanModel> recentScans;
 
     String smsBody, logDB, logSMS;
     Calendar calendar;
@@ -194,6 +196,6 @@ public class MainActivity extends AppCompatActivity {
         dbHalp = new DBHelper(MainActivity.this);
         outCount = dbHalp.getScanCount(simpleDate.format(calendar.getTime()), "out");//-----------------
         inCount = dbHalp.getScanCount(simpleDate.format(calendar.getTime()), "in");//-----------------
-
+        recentScans = dbHalp.getRecentScans();
     }
 }
