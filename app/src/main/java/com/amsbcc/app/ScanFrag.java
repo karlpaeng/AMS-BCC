@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +15,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class ScanFrag extends Fragment {
+    View v;
+
+    Button scanIn, scanOut;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +64,28 @@ public class ScanFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_scan, container, false);
+        v = inflater.inflate(R.layout.fragment_scan, container, false);
+        scanIn = v.findViewById(R.id.scanIn);
+        scanOut = v.findViewById(R.id.scanOut);
+
+        scanIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).logDB = "in";
+                ((MainActivity) getActivity()).logSMS = "to";
+                ((MainActivity) getActivity()).scanCode();
+            }
+        });
+        scanOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity) getActivity()).logDB = "out";
+                ((MainActivity) getActivity()).logSMS = " of";
+                ((MainActivity) getActivity()).scanCode();
+            }
+        });
+
+
+        return v;
     }
 }

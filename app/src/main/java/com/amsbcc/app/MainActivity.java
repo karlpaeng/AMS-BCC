@@ -1,5 +1,7 @@
 package com.amsbcc.app;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.app.ActivityCompat;
@@ -8,9 +10,11 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,14 +22,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amsbcc.app.databinding.ActivityMainBinding;
+import com.journeyapps.barcodescanner.ScanContract;
+import com.journeyapps.barcodescanner.ScanOptions;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     TextView actionBar;
+
+    String smsBody, logDB, logSMS;
+    Calendar calendar;
+    SimpleDateFormat simpleDate, simpleTime;
+    String dateStr, timeStr;
+    DBHelper dbHalp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);// no dark mode
@@ -36,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setSelectedItemId(R.id.home);
         actionBar = findViewById(R.id.barView);
         //-----------------------
-        DBHelper dbHalp = new DBHelper(MainActivity.this);
+        dbHalp = new DBHelper(MainActivity.this);
         if (dbHalp.checkExistingSignin()){
 
         }else{
@@ -94,5 +107,71 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout, fragment);
         fragmentTransaction.commit();
 
+    }
+    public void scanCode(){
+        ScanOptions options = new ScanOptions();
+        options.setPrompt("Press volume up button to turn on flash");
+        options.setBeepEnabled(true);
+        options.setOrientationLocked(true);
+        options.setCaptureActivity(CaptureAct.class);
+        barLauncher.launch(options);
+    }
+
+    ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result->{
+        if(result.getContents() != null){
+            StudentModel student = dbHalp.searchStudentByID(Integer.parseInt(result.getContents()));
+            if(student.studID != -1){//check query if id exists at student table, get name,contact from id @ the db
+
+                calendar = Calendar.getInstance();
+                simpleDate = new SimpleDateFormat("yyyy-MMM-dd");
+                simpleTime = new SimpleDateFormat("hh:mm:ss a");
+                dateStr = simpleDate.format(calendar.getTime());
+                timeStr = simpleTime.format(calendar.getTime());
+
+                ScanModel scan = new ScanModel(
+                        student.studID,
+                        student.studName,
+                        dateStr,
+                        timeStr,
+                        logDB
+                );
+                dbHalp.inputScanToDB(scan);
+                smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
+                try{
+//                    SmsManager mySmsManager = SmsManager.getDefault();
+//                    mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
+
+                    //"LOG" + logDB.toUpperCase() + " Scan successful"
+                    //student id : name
+
+                    //temporary
+                }catch (Exception e){
+                    e.printStackTrace();
+                    alertDia("SMS not Sent", "The SMS Notification failed to send.");
+                }
+                Toast.makeText(MainActivity.this, "SMS was sent", Toast.LENGTH_SHORT).show();
+                alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
+            }else{
+                alertDia("Scan failed", "This student was not found. Try again.");
+            }
+            //alertDia("Error", "Scan failed. Try again." + result.getContents().toString());
+            //Toast.makeText(MainActivity.this, "not null"+result.getContents().toString(), Toast.LENGTH_SHORT).show();
+
+        }else{
+            alertDia("Error", "Scan failed. Try again.");
+            //alertDia("Error2", "2Scan failed. Try again.");
+            //Toast.makeText(MainActivity.this, "null", Toast.LENGTH_SHORT).show();
+        }
+    });
+    private void alertDia(String buildTitle, String buildMessage){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(buildTitle);
+        builder.setMessage(buildMessage);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        }).show();
     }
 }
