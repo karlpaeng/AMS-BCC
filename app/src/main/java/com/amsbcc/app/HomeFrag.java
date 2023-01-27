@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +15,8 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class HomeFrag extends Fragment {
+    View v;
+    TextView date, in, out;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +62,14 @@ public class HomeFrag extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        v = inflater.inflate(R.layout.fragment_home, container, false);
+        date = v.findViewById(R.id.dateTextDash);
+        in = v.findViewById(R.id.totalSignIn);
+        out = v.findViewById(R.id.totalSignOut);
+
+        date.setText( ((MainActivity) getActivity()).currDate);
+        in.setText("" + ((MainActivity) getActivity()).inCount);
+        out.setText("" + ((MainActivity) getActivity()).outCount);
+        return v;
     }
 }

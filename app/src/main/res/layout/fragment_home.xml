@@ -37,9 +37,10 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout5"
-                android:layout_width="160dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="24dp"
+
                 android:background="@drawable/round_hollow"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:layout_editor_absoluteY="16dp">
@@ -48,18 +49,18 @@
                     android:id="@+id/totalSignIn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:text="00"
                     android:textColor="@color/white"
                     android:textSize="55dp"
-                    android:fontFamily="sans-serif-condensed-medium"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteY="42dp" />
 
                 <TextView
                     android:id="@+id/textViewin"
-                    android:layout_width="78dp"
+                    android:layout_width="85dp"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
                     android:gravity="center_vertical"
@@ -72,32 +73,36 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="160dp"
+                android:id="@+id/constraintLayout6"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
+
                 android:background="@drawable/round_hollow"
                 app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
                 tools:layout_editor_absoluteY="12dp">
+
                 <TextView
                     android:id="@+id/totalSignOut"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:fontFamily="sans-serif-condensed-medium"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
                     android:text="00"
                     android:textColor="@color/white"
                     android:textSize="55dp"
-                    android:fontFamily="sans-serif-condensed-medium"
                     app:layout_constraintStart_toStartOf="parent"
                     tools:layout_editor_absoluteY="42dp" />
 
                 <TextView
                     android:id="@+id/textViewout"
-                    android:layout_width="78dp"
+                    android:layout_width="85dp"
                     android:layout_height="match_parent"
                     android:fontFamily="sans-serif-black"
                     android:gravity="center_vertical"
                     android:paddingLeft="10dp"
+
                     android:text="Logout\nScans"
                     android:textColor="@color/white"
                     android:textSize="20dp"

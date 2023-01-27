@@ -280,4 +280,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnStr;
     }
+    public int getScanCount(String date, String inOrOut){
+        int returnInt;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(scan_id) " +
+                                        "FROM scans " +
+                                        "WHERE date ='" + date + "' AND log = '" + inOrOut + "';",
+                                        null);
+        if (cursor.moveToFirst()) {
+            returnInt = cursor.getInt(0);
+        } else {
+            returnInt = -1;
+        }
+        cursor.close();
+        db.close();
+        return returnInt;
+    }
+
 }

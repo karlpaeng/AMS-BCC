@@ -37,7 +37,8 @@ public class MainActivity extends AppCompatActivity {
     String smsBody, logDB, logSMS;
     Calendar calendar;
     SimpleDateFormat simpleDate, simpleTime;
-    String dateStr, timeStr;
+    String dateStr, timeStr, currDate;
+    int outCount, inCount;
     DBHelper dbHalp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        //setdate
+        setTextData();
         replaceFragment(new HomeFrag());
         binding.bottomNavigationView.setSelectedItemId(R.id.home);
         actionBar = findViewById(R.id.barView);
@@ -81,6 +84,8 @@ public class MainActivity extends AppCompatActivity {
                     actionBar.setText("View Scan Records");
                     break;
                 case R.id.home:
+                    //setdate
+                    setTextData();
                     replaceFragment(new HomeFrag());
                     actionBar.setText("Dashboard");
                     break;
@@ -180,5 +185,15 @@ public class MainActivity extends AppCompatActivity {
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         dbHalp.updateSigninRecord(0);
         startActivity(intent);
+    }
+    public void setTextData(){
+        calendar = Calendar.getInstance();
+        simpleDate = new SimpleDateFormat("yyyy, MMMM dd, EEEE");
+        currDate = simpleDate.format(calendar.getTime());//-----------------
+        simpleDate = new SimpleDateFormat("yyyy-MMM-dd");
+        dbHalp = new DBHelper(MainActivity.this);
+        outCount = dbHalp.getScanCount(simpleDate.format(calendar.getTime()), "out");//-----------------
+        inCount = dbHalp.getScanCount(simpleDate.format(calendar.getTime()), "in");//-----------------
+
     }
 }
