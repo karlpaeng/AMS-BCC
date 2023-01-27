@@ -280,4 +280,47 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnStr;
     }
+    public int getScanCount(String date, String inOrOut){
+        int returnInt;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(scan_id) " +
+                                        "FROM scans " +
+                                        "WHERE date ='" + date + "' AND log = '" + inOrOut + "';",
+                                        null);
+        if (cursor.moveToFirst()) {
+            returnInt = cursor.getInt(0);
+        } else {
+            returnInt = -1;
+        }
+        cursor.close();
+        db.close();
+        return returnInt;
+    }
+    public ArrayList<ScanModel> getRecentScans(){
+        ArrayList<ScanModel> returnList = new ArrayList<>();
+        //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM scans ORDER BY scan_id DESC LIMIT 8;", null);
+        if (cursor.moveToFirst()) {
+            ScanModel scanHead = new ScanModel(-1, "NAME", "DATE", "TIME", "LOG");
+            returnList.add(scanHead);
+            do {
+                int StudID = cursor.getInt(1);
+                String name = cursor.getString(2);
+                String date = cursor.getString(3);
+                String time = cursor.getString(4);
+                String log = cursor.getString(5);
+
+                ScanModel scan = new ScanModel(StudID, name, date, time, log);
+                returnList.add(scan);
+            } while (cursor.moveToNext());
+        } else {
+
+        }
+
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
 }

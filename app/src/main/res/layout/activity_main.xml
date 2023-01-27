@@ -4,64 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#2A5C99"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="372dp"
-        android:layout_height="278dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bcc_logo_navy2" />
-
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="298dp"
-        android:layout_height="84dp"
-        android:gravity="center"
-        android:text="Welcome to BCC Attendance Monitoring System. Enter Password to proceed."
-        android:textColor="#FFFFFF"
-        android:textSize="20sp"
-
+        android:id="@+id/barView"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/navy"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center|center_vertical"
+        android:text="Dashboard"
+        android:textColor="@color/white"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="306dp"
-        android:layout_height="68dp"
-        android:layout_marginTop="24dp"
-        android:background="#30FFFFFF"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="20dp"
-        android:textColor="#90FFFFFF"
-        android:textColorHint="#90FFFFFF"
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@id/barView"
+        >
 
-    <Button
-        android:id="@+id/authBtn"
-        android:layout_width="302dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="24dp"
-        android:background="@drawable/round_btn"
-        android:backgroundTint="#FFFFFF"
-        android:text="Authorize"
-        android:textColor="#2A5C99"
-        app:backgroundTint="@color/white"
+    </FrameLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
-
+        app:menu="@menu/bot_nav"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

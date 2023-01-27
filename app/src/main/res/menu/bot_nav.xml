@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/scan"
+        android:icon="@drawable/nav_qr_code"
+        android:title="" />
+    <item
+        android:id="@+id/view"
+        android:icon="@drawable/nav_search"
+        android:title="" />
+    <item
+        android:id="@+id/home"
+        android:icon="@drawable/nav_home"
+        android:title="" />
+    <item
+        android:id="@+id/mnge"
+        android:icon="@drawable/nav_content"
+        android:title="" />
+    <item
+        android:id="@+id/sett"
+        android:icon="@drawable/nav_setting"
+        android:title="" />
+
+
+</menu>
