@@ -1,5 +1,6 @@
 package com.amsbcc.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class HomeFrag extends Fragment {
     View v;
     RecyclerView recViewDash;
     TextView date, in, out;
+    Button unnecessaryButtonRequestedByClient;
     private ArrayList<ScanModel> scanList;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -74,6 +77,7 @@ public class HomeFrag extends Fragment {
         in = v.findViewById(R.id.totalSignIn);
         out = v.findViewById(R.id.totalSignOut);
         recViewDash = v.findViewById(R.id.recViewDash);
+        unnecessaryButtonRequestedByClient = v.findViewById(R.id.searchClassNewHome);
 
         date.setText( ((MainActivity) getActivity()).currDate);
         in.setText("" + ((MainActivity) getActivity()).inCount);
@@ -85,6 +89,14 @@ public class HomeFrag extends Fragment {
         recViewDash.setLayoutManager(layoutManager);
         recViewDash.setItemAnimator(new DefaultItemAnimator());
         recViewDash.setAdapter(adapter);
+
+        unnecessaryButtonRequestedByClient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent((MainActivity) getActivity(), SearchClass.class);
+                startActivity(intent);
+            }
+        });
         return v;
     }
 }
