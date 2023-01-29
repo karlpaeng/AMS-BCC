@@ -159,6 +159,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void clearScanTable(){
         SQLiteDatabase db = this.getWritableDatabase();
         db.execSQL("DELETE FROM scans");
+        db.execSQL("UPDATE sqlite_sequence SET seq=0 WHERE NAME='scans';");//reset primary key to 1
     }
     public ArrayList<ScanModel> searchScanByStudID(int studID){
         ArrayList<ScanModel> returnList = new ArrayList<>();
