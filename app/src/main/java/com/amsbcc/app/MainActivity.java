@@ -125,8 +125,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result->{
+
         if(result.getContents() != null){
-            StudentModel student = dbHalp.searchStudentByID(Integer.parseInt(result.getContents()));
+            StudentModel student = new StudentModel();
+            try {
+                 student = dbHalp.searchStudentByID(Integer.parseInt(result.getContents()));
+            }catch (Exception e){
+                e.printStackTrace();
+                alertDia(e.toString(), "QR code is not a student ID");
+                student.studID = -1;
+            }
             if(student.studID != -1){//check query if id exists at student table, get name,contact from id @ the db
 
                 calendar = Calendar.getInstance();
