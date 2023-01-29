@@ -39,90 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout4"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView8"
-            tools:layout_editor_absoluteX="40dp">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout5"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="24dp"
-
-                android:background="@drawable/round_hollow"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="16dp">
-
-                <TextView
-                    android:id="@+id/totalSignIn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="00"
-                    android:textColor="@color/white"
-                    android:textSize="55dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="42dp" />
-
-                <TextView
-                    android:id="@+id/textViewin"
-                    android:layout_width="85dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="Login\nScans"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@+id/totalSignIn"
-                    tools:layout_editor_absoluteY="19dp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout6"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginStart="24dp"
-
-                android:background="@drawable/round_hollow"
-                app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
-                tools:layout_editor_absoluteY="12dp">
-
-                <TextView
-                    android:id="@+id/totalSignOut"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-condensed-medium"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="00"
-                    android:textColor="@color/white"
-                    android:textSize="55dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:layout_editor_absoluteY="42dp" />
-
-                <TextView
-                    android:id="@+id/textViewout"
-                    android:layout_width="85dp"
-                    android:layout_height="match_parent"
-                    android:fontFamily="sans-serif-black"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-
-                    android:text="Logout\nScans"
-                    android:textColor="@color/white"
-                    android:textSize="20dp"
-                    app:layout_constraintStart_toEndOf="@+id/totalSignOut"
-                    tools:layout_editor_absoluteY="19dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/dateTextDash"
@@ -153,7 +70,7 @@
             android:text="Total QR Scans (Today)"
             android:textColor="@color/navy"
             android:textSize="18dp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+            app:layout_constraintBottom_toTopOf="@+id/horiScroll"
             app:layout_constraintStart_toStartOf="parent" />
 
         <TextView
@@ -191,6 +108,123 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
+        <HorizontalScrollView
+            android:id="@+id/horiScroll"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/textView8"
+            tools:layout_editor_absoluteY="53dp">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/asd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="24dp"
+
+                    android:background="@drawable/round_hollow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:layout_editor_absoluteY="16dp">
+
+                    <TextView
+                        android:id="@+id/totalSignIn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="00"
+                        android:textColor="@color/white"
+                        android:textSize="55dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="42dp" />
+
+                    <TextView
+                        android:id="@+id/textViewin"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="Login\nScans"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/totalSignIn"
+                        tools:layout_editor_absoluteY="19dp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="100dp"
+                    android:layout_marginStart="24dp"
+
+                    android:background="@drawable/round_hollow"
+                    app:layout_constraintStart_toEndOf="@+id/constraintLayout5"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    tools:layout_editor_absoluteY="12dp">
+
+                    <TextView
+                        android:id="@+id/totalSignOut"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif-condensed-medium"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+                        android:text="00"
+                        android:textColor="@color/white"
+                        android:textSize="55dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:layout_editor_absoluteY="42dp" />
+
+                    <TextView
+                        android:id="@+id/textViewout"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
+                        android:fontFamily="sans-serif-black"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="10dp"
+
+                        android:text="Logout\nScans"
+                        android:textColor="@color/white"
+                        android:textSize="20dp"
+                        app:layout_constraintStart_toEndOf="@+id/totalSignOut"
+                        tools:layout_editor_absoluteY="19dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/asd2"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/constraintLayout5"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/asd3"
+                    android:layout_width="24dp"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/constraintLayout6"                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </HorizontalScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -82,6 +82,8 @@ public class HomeFrag extends Fragment {
         date.setText( ((MainActivity) getActivity()).currDate);
         in.setText("" + ((MainActivity) getActivity()).inCount);
         out.setText("" + ((MainActivity) getActivity()).outCount);
+//        in.setText("0000");
+//        out.setText("0000");
 
         scanList = ((MainActivity) getActivity()).recentScans;
         RecAdapterDashB adapter = new RecAdapterDashB(scanList);
