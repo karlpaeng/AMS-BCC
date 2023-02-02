@@ -43,6 +43,7 @@ public class SelectFile extends AppCompatActivity {
 
     Uri studListUri;
     String filePath;
+    Bundle bundle;
 
     private static final int CODE = 1001;
 
@@ -52,6 +53,7 @@ public class SelectFile extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bundle = savedInstanceState;
         setContentView(R.layout.activity_select_file);
         selectFile = findViewById(R.id.fileSelectBtn);
         pathTV = findViewById(R.id.pathTextView);
@@ -90,6 +92,12 @@ public class SelectFile extends AppCompatActivity {
     }
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         //
+        if (data == null){
+            Intent intent = new Intent(SelectFile.this, SelectFile.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(intent);
+            return;
+        }
         studListUri = data.getData();
         //String path = null;
 //        String[] proj = { MediaStore.MediaColumns.DATA };
