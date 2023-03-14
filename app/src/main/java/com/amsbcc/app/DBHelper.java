@@ -157,7 +157,10 @@ public class DBHelper extends SQLiteOpenHelper {
     public int getExistingTimeIn(int stud_id, String date){
         SQLiteDatabase db = this.getReadableDatabase();
         int retInt;
-        Cursor cursor = db.rawQuery("SELECT scan_id FROM scans WHERE stud_num = " + stud_id + " AND date = '" + date + "' AND time_out = '-' ORDER BY scan_id DESC;", null);
+        Cursor cursor = db.rawQuery("SELECT scan_id FROM scans " +
+                "WHERE stud_num = " + stud_id +
+                " AND date = '" + date +
+                "' AND time_out = '-' ORDER BY scan_id DESC;", null);
         if(cursor.moveToFirst()) {
             retInt = cursor.getInt(0);
             cursor.close();
@@ -186,7 +189,8 @@ public class DBHelper extends SQLiteOpenHelper {
                                                 " scans.date," +
                                                 " scans.time_in, " +
                                                 " scans.time_out " +
-                "FROM students INNER JOIN scans ON students.stud_id = scans.stud_num WHERE stud_id = " + studID + ";", null);
+                                    "FROM students INNER JOIN scans ON students.stud_id = scans.stud_num " +
+                                    "WHERE stud_id = " + studID + ";", null);
         if (cursor.moveToFirst()) {
 //            ScanDisplayModel scanHead = new ScanDisplayModel("NAME", -1, "DATE", "IN", "OUT");
 //            returnList.add(scanHead);
@@ -220,7 +224,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 " scans.date," +
                 " scans.time_in, " +
                 " scans.time_out " +
-                "FROM students INNER JOIN scans ON students.stud_id = scans.stud_num WHERE stud_num IN (SELECT stud_id FROM students WHERE " +
+                "FROM students INNER JOIN scans ON students.stud_id = scans.stud_num " +
+                "WHERE stud_num IN (SELECT stud_id FROM students WHERE " +
                 "stud_yr = " + year + " AND " +
                 "stud_course = '" + course + "' AND " +
                 "stud_section = '" + section +"');", null);
