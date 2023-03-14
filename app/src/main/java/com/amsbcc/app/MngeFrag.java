@@ -136,12 +136,13 @@ public class MngeFrag extends Fragment {
                     dialogInterface.dismiss();
                 }else if (tag.equals("export")){
                     //do export here
-                    ArrayList<ScanModel> scanList = dbHalp.allScanRecords();
+                    ArrayList<ScanDisplayModel> scanList = dbHalp.allScanRecords();
                     XSSFWorkbook xwb = new XSSFWorkbook();
                     XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
                     xsheet.setColumnWidth(1, 20 * 256);
                     xsheet.setColumnWidth(2, 15 * 256);
                     xsheet.setColumnWidth(3, 15 * 256);
+                    xsheet.setColumnWidth(4, 15 * 256);
                     int listSize = scanList.size();
                     for (int q = 0 ; q < listSize ; q++){
                         XSSFRow xRow = xsheet.createRow(q);
@@ -152,9 +153,9 @@ public class MngeFrag extends Fragment {
                         xCell = xRow.createCell(2);
                         xCell.setCellValue(scanList.get(q).date);
                         xCell = xRow.createCell(3);
-                        xCell.setCellValue(scanList.get(q).time);
+                        xCell.setCellValue(scanList.get(q).timeIn);
                         xCell = xRow.createCell(4);
-                        xCell.setCellValue(scanList.get(q).log);
+                        xCell.setCellValue(scanList.get(q).timeOut);
                     }
 //                    XSSFRow xRow = xsheet.createRow(0);
 //                    XSSFCell xCell = xRow.createCell(0);

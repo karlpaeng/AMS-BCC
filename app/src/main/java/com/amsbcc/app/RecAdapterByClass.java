@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 public class RecAdapterByClass extends RecyclerView.Adapter<RecAdapterByClass.MyViewHolder>{
-    private ArrayList<ScanModel> scanList;
+    private ArrayList<ScanDisplayModel> scanList;
 
-    public RecAdapterByClass(ArrayList<ScanModel> scanList){
+    public RecAdapterByClass(ArrayList<ScanDisplayModel> scanList){
         this.scanList = scanList;
     }
     public class MyViewHolder extends RecyclerView.ViewHolder{
@@ -38,8 +38,8 @@ public class RecAdapterByClass extends RecyclerView.Adapter<RecAdapterByClass.My
     public void onBindViewHolder(@NonNull RecAdapterByClass.MyViewHolder holder, int position) {
         holder.nameTxt.setText(scanList.get(position).name);
         holder.dateTxt.setText(scanList.get(position).date);
-        holder.timeTxt.setText(scanList.get(position).time);
-        holder.logTxt.setText(scanList.get(position).log);
+        holder.timeTxt.setText(scanList.get(position).timeIn);
+        holder.logTxt.setText(scanList.get(position).timeOut);
     }
 
 

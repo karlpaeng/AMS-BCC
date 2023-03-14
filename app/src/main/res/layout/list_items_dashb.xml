@@ -10,7 +10,7 @@
         android:id="@+id/idDashItem"
         android:layout_width="80dp"
         android:layout_height="22dp"
-        android:layout_marginStart="7dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
         android:gravity="left"
@@ -19,38 +19,41 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/dateTimeDashItem"
         android:layout_width="190dp"
         android:layout_height="22dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="0dp"
         android:gravity="left"
         android:text="2022/12/31; 12:12:12 PM"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/idDashItem"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
 
     <TextView
         android:id="@+id/logDashItem"
         android:layout_width="82dp"
         android:layout_height="22dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
-        android:layout_marginLeft="5dp"
         android:gravity="left"
         android:text="TextView"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/dateTimeDashItem"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <View
         android:id="@+id/divider8"
@@ -61,4 +64,21 @@
         app:layout_constraintBottom_toBottomOf="parent"
 
         tools:layout_editor_absoluteX="1dp" />
+
+    <TextView
+        android:id="@+id/nameDashItem"
+        android:text="TextView"
+        android:gravity="left"
+        android:layout_width="80dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="4dp"
+
+        android:layout_marginBottom="4dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/idDashItem"
+        app:layout_constraintLeft_toLeftOf="parent"
+        tools:layout_editor_absoluteX="359dp"
+        tools:layout_editor_absoluteY="5dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

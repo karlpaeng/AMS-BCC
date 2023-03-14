@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class ResultView extends AppCompatActivity {
-    private ArrayList<ScanModel> scanList;
+    private ArrayList<ScanDisplayModel> scanList;
     private RecyclerView recyclerView;
     TextView label;
     TextView query;
@@ -86,11 +86,11 @@ public class ResultView extends AppCompatActivity {
                 fileNameAdd = "-searched-" + id_value;
             }
 
-            RecAdapter adapter = new RecAdapter(scanList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapter);
+//            RecAdapter adapter = new RecAdapter(scanList);
+//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//            recyclerView.setLayoutManager(layoutManager);
+//            recyclerView.setItemAnimator(new DefaultItemAnimator());
+//            recyclerView.setAdapter(adapter);
 
         }
         if(prev.equals("act_class")){
@@ -106,11 +106,11 @@ public class ResultView extends AppCompatActivity {
                 query.setText(query.getText().toString() + "(NO_RESULTS_FOUND)");
             }
 
-            RecAdapterByClass adapterByClass = new RecAdapterByClass(scanList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapterByClass);
+//            RecAdapterByClass adapterByClass = new RecAdapterByClass(scanList);
+//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//            recyclerView.setLayoutManager(layoutManager);
+//            recyclerView.setItemAnimator(new DefaultItemAnimator());
+//            recyclerView.setAdapter(adapterByClass);
         }
         if(prev.equals("act_date")){
             label.setText("Date:");
@@ -123,12 +123,18 @@ public class ResultView extends AppCompatActivity {
                 query.setText(query.getText().toString() + "(NO_RESULTS_FOUND)");
             }
 
-            RecAdapterByDate adapterByDate = new RecAdapterByDate(scanList);
-            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-            recyclerView.setLayoutManager(layoutManager);
-            recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setAdapter(adapterByDate);
+//            RecAdapterByDate adapterByDate = new RecAdapterByDate(scanList);
+//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+//            recyclerView.setLayoutManager(layoutManager);
+//            recyclerView.setItemAnimator(new DefaultItemAnimator());
+//            recyclerView.setAdapter(adapterByDate);
         }
+        RecAdapterDashB adapter = new RecAdapterDashB(scanList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
+
         export.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -151,9 +157,9 @@ public class ResultView extends AppCompatActivity {
                         xCell = xRow.createCell(2);
                         xCell.setCellValue(scanList.get(q).date);
                         xCell = xRow.createCell(3);
-                        xCell.setCellValue(scanList.get(q).time);
+                        xCell.setCellValue(scanList.get(q).timeIn);
                         xCell = xRow.createCell(4);
-                        xCell.setCellValue(scanList.get(q).log);
+                        xCell.setCellValue(scanList.get(q).timeOut);
                     }
 //                    XSSFRow xRow = xsheet.createRow(0);
 //                    XSSFCell xCell = xRow.createCell(0);

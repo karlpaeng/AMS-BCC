@@ -96,7 +96,7 @@ public class ManageStudentData extends AppCompatActivity {
                     dialogInterface.dismiss();
                 }else if (tag.equals("export")){
                     //do export here
-                    ArrayList<ScanModel> scanList = dbHalp.allScanRecords();
+                    ArrayList<ScanDisplayModel> scanList = dbHalp.allScanRecords();
                     XSSFWorkbook xwb = new XSSFWorkbook();
                     XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
                     xsheet.setColumnWidth(1, 20 * 256);
@@ -112,9 +112,9 @@ public class ManageStudentData extends AppCompatActivity {
                         xCell = xRow.createCell(2);
                         xCell.setCellValue(scanList.get(q).date);
                         xCell = xRow.createCell(3);
-                        xCell.setCellValue(scanList.get(q).time);
+                        xCell.setCellValue(scanList.get(q).timeIn);
                         xCell = xRow.createCell(4);
-                        xCell.setCellValue(scanList.get(q).log);
+                        xCell.setCellValue(scanList.get(q).timeOut);
                     }
 //                    XSSFRow xRow = xsheet.createRow(0);
 //                    XSSFCell xCell = xRow.createCell(0);

@@ -34,7 +34,7 @@ import java.util.Locale;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     TextView actionBar;
-    ArrayList<ScanModel> recentScans;
+    ArrayList<ScanDisplayModel> recentScans;
 
     String smsBody, logDB, logSMS;
     Calendar calendar;
@@ -143,18 +143,29 @@ public class MainActivity extends AppCompatActivity {
                 dateStr = simpleDate.format(calendar.getTime());
                 timeStr = simpleTime.format(calendar.getTime());
 
-                ScanModel scan = new ScanModel(
-                        student.studID,
-                        student.studName,
-                        dateStr,
-                        timeStr,
-                        logDB
-                );
-                dbHalp.inputScanToDB(scan);
+                if(logDB.equals("in")){
+                    ScanModel scan = new ScanModel(
+                            student.studID,
+                            dateStr,
+                            timeStr,
+                            "-"
+                    );
+                    dbHalp.timeInScanToDB(scan);
+                    alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
+                }else if (logDB.equals("out")){
+                    int tempScanId = dbHalp.getExistingTimeIn(student.studID, dateStr);
+                    if(tempScanId == -1){
+                        alertDia("ERROR: NO LOGIN RECORD", "This Student has not been signed in yet. Logout scan not recorded.");
+                    }else{
+                        dbHalp.timeOutScanToDB(tempScanId, timeStr);
+                        alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
+                    }
+                }
                 smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
                 try{
-                    SmsManager mySmsManager = SmsManager.getDefault();
-                    mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
+//                    SmsManager mySmsManager = SmsManager.getDefault();
+//                    mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
+//                    Toast.makeText(MainActivity.this, "SMS was sent", Toast.LENGTH_SHORT).show();
 
                     //"LOG" + logDB.toUpperCase() + " Scan successful"
                     //student id : name
@@ -164,8 +175,8 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                     alertDia("SMS not Sent", "The SMS Notification failed to send.");
                 }
-                Toast.makeText(MainActivity.this, "SMS was sent", Toast.LENGTH_SHORT).show();
-                alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
+
+
             }else{
                 alertDia("Scan failed", "This student was not found. Try again.");
             }

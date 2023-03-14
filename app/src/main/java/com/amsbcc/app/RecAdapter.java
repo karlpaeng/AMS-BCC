@@ -12,9 +12,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class RecAdapter extends RecyclerView.Adapter<RecAdapter.MyViewHolder> {
-    private ArrayList<ScanModel> scanList;
+    private ArrayList<ScanDisplayModel> scanList;
 
-    public RecAdapter(ArrayList<ScanModel> scanList){
+    public RecAdapter(ArrayList<ScanDisplayModel> scanList){
         this.scanList = scanList;
     }
 
@@ -38,8 +38,8 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.MyViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull RecAdapter.MyViewHolder holder, int position) {
         holder.dateTxt.setText(scanList.get(position).date);
-        holder.timeTxt.setText(scanList.get(position).time);
-        holder.logTxt.setText(scanList.get(position).log);
+        holder.timeTxt.setText(scanList.get(position).timeIn);
+        holder.logTxt.setText(scanList.get(position).timeOut);
     }
 
     @Override

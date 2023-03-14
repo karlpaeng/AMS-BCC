@@ -128,14 +128,23 @@ public class Home extends AppCompatActivity {
                 dateStr = simpleDate.format(calendar.getTime());
                 timeStr = simpleTime.format(calendar.getTime());
 
-                ScanModel scan = new ScanModel(
-                        student.studID,
-                        student.studName,
-                        dateStr,
-                        timeStr,
-                        logDB
-                );
-                dbHalp.inputScanToDB(scan);
+                if(logDB.equals("in")){
+                    ScanModel scan = new ScanModel(
+                            student.studID,
+                            dateStr,
+                            timeStr,
+                            "null"
+                    );
+                    dbHalp.timeInScanToDB(scan);
+                }else if (logDB.equals("out")){
+                    int tempScanId = dbHalp.getExistingTimeIn(student.studID, dateStr);
+                    if(tempScanId == -1){
+                        alertDia("ERROR: NO LOGIN RECORD", "This Student has not been signed in yet.");
+                    }else{
+                        dbHalp.timeOutScanToDB(tempScanId, dateStr);
+                    }
+                }
+
                 smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
                 try{
                     //SmsManager mySmsManager = SmsManager.getDefault();
