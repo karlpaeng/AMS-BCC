@@ -42,16 +42,11 @@ public class RecAdapterDashB extends RecyclerView.Adapter<RecAdapterDashB.MyView
     @Override
     public void onBindViewHolder(@NonNull RecAdapterDashB.MyViewHolder holder, int position) {
 
-
         holder.idTxt.setText("" + scanList.get(position).studentID);
         holder.nameTxt.setText("" + scanList.get(position).name);
         holder.dateTxt.setText("" + scanList.get(position).date);
         holder.inTxt.setText("" + scanList.get(position).timeIn);
         holder.outTxt.setText("" + scanList.get(position).timeOut);
-
-
-
-
 
     }
 

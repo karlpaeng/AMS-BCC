@@ -99,22 +99,7 @@ public class SelectFile extends AppCompatActivity {
             return;
         }
         studListUri = data.getData();
-        //String path = null;
-//        String[] proj = { MediaStore.MediaColumns.DATA };
-//        Cursor cursor = getContentResolver().query(studListUri, proj, null, null, null);
-//        if (cursor.moveToFirst()) {
-//            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-//            filePath = cursor.getString(column_index);
-//        }
-//        cursor.close();
 
-//        String[] proj = { MediaStore.Images.Media.DATA };
-//        CursorLoader loader = new CursorLoader(SelectFile.this, studListUri, proj, null, null, null);
-//        Cursor cursor = loader.loadInBackground();
-//        int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-//        cursor.moveToFirst();
-//        filePath = cursor.getString(column_index);
-//        cursor.close();
         //Log.d("asd: ", filePath + "q");
         File tempFile = new File(studListUri.getPath());
         final String[] split = tempFile.getPath().split(":");//split the path.

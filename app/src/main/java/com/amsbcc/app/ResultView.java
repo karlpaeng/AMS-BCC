@@ -86,12 +86,6 @@ public class ResultView extends AppCompatActivity {
                 fileNameAdd = "-searched-" + id_value;
             }
 
-//            RecAdapter adapter = new RecAdapter(scanList);
-//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-//            recyclerView.setLayoutManager(layoutManager);
-//            recyclerView.setItemAnimator(new DefaultItemAnimator());
-//            recyclerView.setAdapter(adapter);
-
         }
         if(prev.equals("act_class")){
             label.setText("Class:");
@@ -106,11 +100,6 @@ public class ResultView extends AppCompatActivity {
                 query.setText(query.getText().toString() + "(NO_RESULTS_FOUND)");
             }
 
-//            RecAdapterByClass adapterByClass = new RecAdapterByClass(scanList);
-//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-//            recyclerView.setLayoutManager(layoutManager);
-//            recyclerView.setItemAnimator(new DefaultItemAnimator());
-//            recyclerView.setAdapter(adapterByClass);
         }
         if(prev.equals("act_date")){
             label.setText("Date:");
@@ -123,11 +112,6 @@ public class ResultView extends AppCompatActivity {
                 query.setText(query.getText().toString() + "(NO_RESULTS_FOUND)");
             }
 
-//            RecAdapterByDate adapterByDate = new RecAdapterByDate(scanList);
-//            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-//            recyclerView.setLayoutManager(layoutManager);
-//            recyclerView.setItemAnimator(new DefaultItemAnimator());
-//            recyclerView.setAdapter(adapterByDate);
         }
         RecAdapterDashB adapter = new RecAdapterDashB(scanList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -147,6 +131,7 @@ public class ResultView extends AppCompatActivity {
                     xsheet.setColumnWidth(1, 20 * 256);
                     xsheet.setColumnWidth(2, 15 * 256);
                     xsheet.setColumnWidth(3, 15 * 256);
+                    xsheet.setColumnWidth(4, 15 * 256);
                     int listSize = scanList.size();
                     for (int q = 1 ; q < listSize ; q++){
                         XSSFRow xRow = xsheet.createRow(q-1);
