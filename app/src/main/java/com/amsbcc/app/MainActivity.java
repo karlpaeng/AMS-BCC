@@ -143,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
                 dateStr = simpleDate.format(calendar.getTime());
                 timeStr = simpleTime.format(calendar.getTime());
 
+                smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
+                boolean doSend = false;
                 if(logDB.equals("in")){
                     ScanModel scan = new ScanModel(
                             student.studID,
@@ -152,30 +154,22 @@ public class MainActivity extends AppCompatActivity {
                     );
                     dbHalp.timeInScanToDB(scan);
                     alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
+                    doSend = true;
                 }else if (logDB.equals("out")){
                     int tempScanId = dbHalp.getExistingTimeIn(student.studID, dateStr);
                     if(tempScanId == -1){
                         alertDia("ERROR: NO LOGIN RECORD", "This Student has not been signed in yet. Logout scan not recorded.");
+                        doSend = false;
                     }else{
                         dbHalp.timeOutScanToDB(tempScanId, timeStr);
                         alertDia("LOG" + logDB.toUpperCase() + " Scan successful", student.studID + ":" + student.studName);
+                        doSend = true;
                     }
                 }
-                smsBody = dateStr + ":" + student.studName + " has been logged " + logDB + logSMS + " Baao Community College at " + timeStr;
-                try{
-//                    SmsManager mySmsManager = SmsManager.getDefault();
-//                    mySmsManager.sendTextMessage(student.getStudContNum(), null, smsBody, null, null);
-//                    Toast.makeText(MainActivity.this, "SMS was sent", Toast.LENGTH_SHORT).show();
-
-                    //"LOG" + logDB.toUpperCase() + " Scan successful"
-                    //student id : name
-
-                    //temporary
-                }catch (Exception e){
-                    e.printStackTrace();
-                    alertDia("SMS not Sent", "The SMS Notification failed to send.");
+                //--------
+                if (doSend){
+                    sendSMS(student.getStudContNum());
                 }
-
 
             }else{
                 alertDia("Scan failed", "This student was not found. Try again.");
@@ -189,6 +183,21 @@ public class MainActivity extends AppCompatActivity {
             //Toast.makeText(MainActivity.this, "null", Toast.LENGTH_SHORT).show();
         }
     });
+    private void sendSMS(String contact){
+        try{
+            SmsManager mySmsManager = SmsManager.getDefault();
+            mySmsManager.sendTextMessage(contact, null, smsBody, null, null);
+            Toast.makeText(MainActivity.this, "SMS was sent", Toast.LENGTH_SHORT).show();
+
+            //"LOG" + logDB.toUpperCase() + " Scan successful"
+            //student id : name
+
+            //temporary
+        }catch (Exception e){
+            e.printStackTrace();
+            alertDia("SMS not Sent", "The SMS Notification failed to send.");
+        }
+    }
     private void alertDia(String buildTitle, String buildMessage){
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setTitle(buildTitle);
