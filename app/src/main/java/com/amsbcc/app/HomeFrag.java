@@ -25,7 +25,7 @@ public class HomeFrag extends Fragment {
     View v;
     RecyclerView recViewDash;
     TextView date, in, out;
-    Button unnecessaryButtonRequestedByClient;
+    Button btn;
     private ArrayList<ScanDisplayModel> scanList;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -77,7 +77,7 @@ public class HomeFrag extends Fragment {
         in = v.findViewById(R.id.totalSignIn);
         out = v.findViewById(R.id.totalSignOut);
         recViewDash = v.findViewById(R.id.recViewDash);
-        unnecessaryButtonRequestedByClient = v.findViewById(R.id.searchClassNewHome);
+        btn = v.findViewById(R.id.searchClassNewHome);
 
         date.setText( ((MainActivity) getActivity()).currDate);
         in.setText("" + ((MainActivity) getActivity()).inCount);
@@ -92,7 +92,7 @@ public class HomeFrag extends Fragment {
         recViewDash.setItemAnimator(new DefaultItemAnimator());
         recViewDash.setAdapter(adapter);
 
-        unnecessaryButtonRequestedByClient.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent((MainActivity) getActivity(), SearchClass.class);
