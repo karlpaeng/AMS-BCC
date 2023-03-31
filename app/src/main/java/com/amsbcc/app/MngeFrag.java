@@ -1,7 +1,10 @@
 package com.amsbcc.app;
 
+import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -14,13 +17,13 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-import java.io.File;
-import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -37,6 +40,7 @@ public class MngeFrag extends Fragment {
     Button updateNew, exportNew, clearNew;
     String tag = "";
     DBHelper dbHalp;
+    ExcelHelper xcHalp;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -137,52 +141,25 @@ public class MngeFrag extends Fragment {
                 }else if (tag.equals("export")){
                     //do export here
                     ArrayList<ScanDisplayModel> scanList = dbHalp.allScanRecords();
-                    XSSFWorkbook xwb = new XSSFWorkbook();
-                    XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
-                    xsheet.setColumnWidth(1, 20 * 256);
-                    xsheet.setColumnWidth(2, 15 * 256);
-                    xsheet.setColumnWidth(3, 15 * 256);
-                    xsheet.setColumnWidth(4, 15 * 256);
-                    int listSize = scanList.size();
-                    for (int q = 0 ; q < listSize ; q++){
-                        XSSFRow xRow = xsheet.createRow(q);
-                        XSSFCell xCell = xRow.createCell(0);
-                        xCell.setCellValue(scanList.get(q).studentID + "");
-                        xCell = xRow.createCell(1);
-                        xCell.setCellValue(scanList.get(q).name);
-                        xCell = xRow.createCell(2);
-                        xCell.setCellValue(scanList.get(q).date);
-                        xCell = xRow.createCell(3);
-                        xCell.setCellValue(scanList.get(q).timeIn);
-                        xCell = xRow.createCell(4);
-                        xCell.setCellValue(scanList.get(q).timeOut);
-                    }
-//                    XSSFRow xRow = xsheet.createRow(0);
-//                    XSSFCell xCell = xRow.createCell(0);
-//                    xCell.setCellValue("asd");
+                    XSSFWorkbook xwb = xcHalp.saveToWorkbook(scanList);
 
                     String dateNow = new SimpleDateFormat("yyyyMMMdd-hhmmssa", Locale.getDefault()).format(new Date());
-
-                    File filePath = new File(getContext().getExternalFilesDir(null) + "/amsbcc-" + dateNow + "-exported.xlsx");;
+                    String fileName = "amsbcc-" + dateNow + "-exported.xlsx";
+                    String path;
                     try {
-                        if(filePath.exists()) filePath.createNewFile();
-                        else filePath = new File(getContext().getExternalFilesDir(null) + "/amsbcc-" + dateNow + "-exported.xlsx");
-                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-                        xwb.write(fileOutputStream);
-                        if (fileOutputStream!=null){
-                            fileOutputStream.flush();
-                            fileOutputStream.close();
-                        }
-                        Toast.makeText(getContext(), "File was created:" + filePath.toString(), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
+                        path = xcHalp.saveToFile(xwb, fileName, getContext());
+                        Toast.makeText(getContext(), "File was created:" + path, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
                         Toast.makeText(getContext(), "File failed to create", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.d("asd:", e.toString());
                     }
+
                 }else{
                     dialogInterface.dismiss();
                 }
             }
         }).show();
     }
+
 }

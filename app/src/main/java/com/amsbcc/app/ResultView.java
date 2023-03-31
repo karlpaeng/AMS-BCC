@@ -46,6 +46,9 @@ public class ResultView extends AppCompatActivity {
     String name_value;
     String fileNameAdd;
 
+    ExcelHelper xcHalp = new ExcelHelper();
+    DBHelper dbHalp = new DBHelper(ResultView.this);
+
     //boolean emptyResult;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +72,6 @@ public class ResultView extends AppCompatActivity {
                     }, PackageManager.PERMISSION_GRANTED
             );
         }
-
-        DBHelper dbHalp = new DBHelper(ResultView.this);
-
         String prev = getIntent().getStringExtra("prev_act");
         if(prev.equals("act_id")){
             label.setText("(ID)Student's name:");
@@ -126,44 +126,15 @@ public class ResultView extends AppCompatActivity {
                     Toast.makeText(ResultView.this, "There are no results to export", Toast.LENGTH_SHORT).show();
                 }else{
                     //
-                    XSSFWorkbook xwb = new XSSFWorkbook();
-                    XSSFSheet xsheet = xwb.createSheet("AMS BCC Data");
-                    xsheet.setColumnWidth(1, 20 * 256);
-                    xsheet.setColumnWidth(2, 15 * 256);
-                    xsheet.setColumnWidth(3, 15 * 256);
-                    xsheet.setColumnWidth(4, 15 * 256);
-                    int listSize = scanList.size();
-                    for (int q = 1 ; q < listSize ; q++){
-                        XSSFRow xRow = xsheet.createRow(q-1);
-                        XSSFCell xCell = xRow.createCell(0);
-                        xCell.setCellValue(scanList.get(q).studentID + "");
-                        xCell = xRow.createCell(1);
-                        xCell.setCellValue(scanList.get(q).name);
-                        xCell = xRow.createCell(2);
-                        xCell.setCellValue(scanList.get(q).date);
-                        xCell = xRow.createCell(3);
-                        xCell.setCellValue(scanList.get(q).timeIn);
-                        xCell = xRow.createCell(4);
-                        xCell.setCellValue(scanList.get(q).timeOut);
-                    }
-//                    XSSFRow xRow = xsheet.createRow(0);
-//                    XSSFCell xCell = xRow.createCell(0);
-//                    xCell.setCellValue("asd");
+                    XSSFWorkbook xwb = xcHalp.saveToWorkbook(scanList);
 
                     String dateNow = new SimpleDateFormat("yyyyMMMdd-hhmmssa", Locale.getDefault()).format(new Date());
-
-                    File filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + fileNameAdd + ".xlsx");
+                    String fileName = "amsbcc-" + dateNow + fileNameAdd + ".xlsx";
+                    String path;
                     try {
-                        if(filePath.exists()) filePath.createNewFile();
-                        else filePath = new File(ResultView.this.getExternalFilesDir(null) + "/amsbcc-" + dateNow + fileNameAdd + ".xlsx");
-                        FileOutputStream fileOutputStream = new FileOutputStream(filePath);
-                        xwb.write(fileOutputStream);
-                        if (fileOutputStream!=null){
-                            fileOutputStream.flush();
-                            fileOutputStream.close();
-                        }
-                        Toast.makeText(ResultView.this, "File was created:" + filePath.toString(), Toast.LENGTH_SHORT).show();
-                    } catch (Exception e) {
+                        path = xcHalp.saveToFile(xwb, fileName, ResultView.this);
+                        Toast.makeText(ResultView.this, "File was created:" + path, Toast.LENGTH_SHORT).show();
+                    } catch (IOException e) {
                         Toast.makeText(ResultView.this, "File failed to create", Toast.LENGTH_SHORT).show();
                         e.printStackTrace();
                         Log.d("asd:", e.toString());
