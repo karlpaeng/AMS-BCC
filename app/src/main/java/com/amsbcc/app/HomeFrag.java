@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -24,8 +25,11 @@ import java.util.ArrayList;
 public class HomeFrag extends Fragment {
     View v;
     RecyclerView recViewDash;
-    TextView date, in, out;
-    Button btn;
+    TextView date, in, out, current;
+    Button btnBack, btnForw;
+    DBHelper dbHalp;
+
+    int pageCounter;
     private ArrayList<ScanDisplayModel> scanList;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -77,28 +81,58 @@ public class HomeFrag extends Fragment {
         in = v.findViewById(R.id.totalSignIn);
         out = v.findViewById(R.id.totalSignOut);
         recViewDash = v.findViewById(R.id.recViewDash);
-        btn = v.findViewById(R.id.searchClassNewHome);
+
+        btnBack = v.findViewById(R.id.btnBack);
+        btnForw = v.findViewById(R.id.btnForw);
+
+        current = v.findViewById(R.id.CurrentLogins);
+
+        dbHalp = new DBHelper(getContext());
 
         date.setText( ((MainActivity) getActivity()).currDate);
         in.setText("" + ((MainActivity) getActivity()).inCount);
         out.setText("" + ((MainActivity) getActivity()).outCount);
+
+        current.setText("" + (((MainActivity) getActivity()).inCount - ((MainActivity) getActivity()).outCount));
 //        in.setText("0000");
 //        out.setText("0000");
+        pageCounter = 0;
+        updateList(pageCounter);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pageCounter--;
+                if (pageCounter < 0){
+                    pageCounter = 0;
+                }else {
+                    updateList(pageCounter);
+                }
+            }
+        });
+        btnForw.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                pageCounter++;
+                if ((pageCounter*6)>=dbHalp.scanTableSize()){
+                    pageCounter--;
+                }else {
+                    updateList(pageCounter);
+                }
+            }
+        });
 
-        scanList = ((MainActivity) getActivity()).recentScans;
+
+
+        return v;
+    }
+    private void updateList(int page){
+        scanList = dbHalp.getRecentScans(page);
         RecAdapterDashB adapter = new RecAdapterDashB(scanList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         recViewDash.setLayoutManager(layoutManager);
         recViewDash.setItemAnimator(new DefaultItemAnimator());
         recViewDash.setAdapter(adapter);
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent((MainActivity) getActivity(), SearchClass.class);
-                startActivity(intent);
-            }
-        });
-        return v;
+        adapter.notifyDataSetChanged();
+        //Toast.makeText(getContext(), "asd" + pageCounter, Toast.LENGTH_SHORT).show();
     }
 }

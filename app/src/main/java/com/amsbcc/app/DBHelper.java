@@ -344,7 +344,21 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnInt;
     }
-    public ArrayList<ScanDisplayModel> getRecentScans(){
+    public int scanTableSize(){
+        int returnInt;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(scan_id) FROM scans ;", null);
+        if (cursor.moveToFirst()) {
+            returnInt = cursor.getInt(0);
+        } else {
+            returnInt = -1;
+        }
+        cursor.close();
+        db.close();
+        return returnInt;
+    }
+    public ArrayList<ScanDisplayModel> getRecentScans(int page){
+        int pages = 6;
         ArrayList<ScanDisplayModel> returnList = new ArrayList<>();
         //String queryString = "SELECT * FROM scans WHERE stud_num = " + studID + ";";
         SQLiteDatabase db = this.getReadableDatabase();
@@ -355,7 +369,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 " scans.date," +
                 " scans.time_in, " +
                 " scans.time_out " +
-                "FROM scans INNER JOIN students ON scans.stud_num = students.stud_id ORDER BY scans.scan_id DESC LIMIT 5;", null);
+                "FROM scans INNER JOIN students ON scans.stud_num = students.stud_id ORDER BY scans.scan_id DESC LIMIT " + pages + " OFFSET " + pages*page + ";", null);
         if (cursor.moveToFirst()) {
 //            ScanDisplayModel scanHead = new ScanDisplayModel("NAME", -1, "DATE", "IN", "OUT");
 //            returnList.add(scanHead);

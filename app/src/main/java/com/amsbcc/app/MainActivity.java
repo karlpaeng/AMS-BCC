@@ -224,6 +224,6 @@ public class MainActivity extends AppCompatActivity {
         dbHalp = new DBHelper(MainActivity.this);
         outCount = dbHalp.getScanCount(simpleDate.format(calendar.getTime()), "out");//-----------------
         inCount = dbHalp.getScanCount(simpleDate.format(calendar.getTime()), "in");//-----------------
-        recentScans = dbHalp.getRecentScans();
+
     }
 }
